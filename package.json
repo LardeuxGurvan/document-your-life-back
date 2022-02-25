@@ -1,0 +1,27 @@
+{
+  "name": "projet-11-document-your-life-back",
+  "version": "1.0.0",
+  "description": "Projet de fin de formation ecole O'Clock.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node .",
+    "dev": "DEBUG=*,-express:*,-nodemon* npx nodemon"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/O-clock-Yggdrasil/projet-11-document-your-life-back.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/O-clock-Yggdrasil/projet-11-document-your-life-back/issues"
+  },
+  "homepage": "https://github.com/O-clock-Yggdrasil/projet-11-document-your-life-back#readme",
+  "devDependencies": {
+    "eslint": "^8.9.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.4"
+  }
+}
