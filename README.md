@@ -12,3 +12,6 @@ La plupart des gens ne prennent pas conscience de l’importance de leur quotidi
 
 - L’application à pour but de recentrer les gens sur l’importance du quotidien.
 - L’application permet à l’utilisateur d’illustrer le ressenti de son quotidien.
+
+
+Local database name: dyl
