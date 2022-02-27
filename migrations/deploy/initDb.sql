@@ -8,7 +8,7 @@ CREATE TABLE "user" (
   "first_name" TEXT NOT NULL,
   "last_name" TEXT NOT NULL,
   "password" TEXT NOT NULL,
-  "image" TEXT NOT NULL,
+  "image" TEXT,
   "created_at" TIMESTAMPTZ DEFAULT now(),
   "updated_at" TIMESTAMPTZ
 );
@@ -35,7 +35,7 @@ CREATE TABLE "card" (
 
 CREATE TABLE "goal" (
   "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  "label" TEXT NOT NULL UNIQUE,
+  "label" TEXT NOT NULL,
   "user_id" INT NOT NULL REFERENCES "user"("id"),
   "created_at" TIMESTAMPTZ DEFAULT now(),
   "updated_at" TIMESTAMPTZ
