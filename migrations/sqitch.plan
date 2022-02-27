@@ -2,3 +2,4 @@
 %project=dyl
 
 initDb 2022-02-25T14:16:12Z Dalarog,,, <dalarog@rohan-hp-elitebook-820-g3> # init database
+constraints 2022-02-27T15:18:24Z Dalarog,,, <dalarog@rohan-hp-elitebook-820-g3> # add some constraints on columns
