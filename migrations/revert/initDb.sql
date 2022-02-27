@@ -2,6 +2,6 @@
 
 BEGIN;
 
--- XXX Add DDLs here.
+DROP TABLE "goal", "card", "mood", "user" CASCADE;
 
 COMMIT;
