@@ -1,2 +1,4 @@
 node_modules
 sqitch.conf
+package-lock.json
+.env
