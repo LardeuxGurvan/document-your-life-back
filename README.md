@@ -1,8 +1,6 @@
 # projet-11-document-your-life-back
 
-Projet de fin de formation ecole O'Clock.
-
-Document Your Life est une application qui accompagne les utilisateurs dans la documentation de leur quotidien de manière simplifiée.
+Illustrate your day with videos pictures and commentaries
 
 **Besoins**
 
@@ -14,4 +12,8 @@ La plupart des gens ne prennent pas conscience de l’importance de leur quotidi
 - L’application permet à l’utilisateur d’illustrer le ressenti de son quotidien.
 
 
-Local database name: dyl
+**Setup database**
+
+- Install sqitch
+- Create database named "dyl"
+- sqitch deploy
