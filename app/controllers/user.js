@@ -5,8 +5,8 @@ const { ApiError } = require('../helpers/errorHandler');
 const userController = {
 
     async profil(req, res) {
-        const { id } = req.params;
-        const user = await userDataMapper.findByPk(id);
+        const { userId } = req.params;
+        const user = await userDataMapper.findByPk(Number(userId));
 
         // User does not exists
         if (!user) {

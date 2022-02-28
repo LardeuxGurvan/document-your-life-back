@@ -1,7 +1,7 @@
-const { config } = require('dotenv');
+const debug = require('debug')('SQL:log');
 const { Pool } = require('pg');
 
-config = {};
+const config = {};
 
 if (process.env.NODE_ENV === 'production') {
     config.connectionString = process.env.DATABASE_URL;
@@ -16,7 +16,7 @@ module.exports = {
     originalClient: pool,
 
     async query(...params) {
-        console.log(...params);
+        debug(...params);
 
         return this.originalClient.query(...params);
     },

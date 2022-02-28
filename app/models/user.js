@@ -1,5 +1,4 @@
 const client = require('../config/db');
-const { ApiError } = require('../helpers/errorHandler');
 
 module.exports = {
 
@@ -21,7 +20,7 @@ module.exports = {
         email,
         firstName,
         lastName,
-        encryptedPassword,
+        password,
     ) {
         const savedUser = await client.query(
             'INSERT INTO "user" ("email", "first_name", "last_name", password) VALUES ($1, $2, $3, $4) RETURNING *',
@@ -29,7 +28,7 @@ module.exports = {
                 email,
                 firstName,
                 lastName,
-                encryptedPassword,
+                password,
             ],
         );
         return savedUser.rows[0];

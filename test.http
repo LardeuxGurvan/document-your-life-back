@@ -1,0 +1,27 @@
+@endpoint = http://localhost:{{$dotenv PORT}}
+
+### signup
+POST {{ endpoint }}/signup
+Content-Type: application/json
+
+{
+    "email": "toto@tata.com",
+    "first_name": "toto",
+    "last_name": "tata",
+    "password": "TotoTata!123"
+}
+
+
+### profil
+GET {{ endpoint }}/user/1/profil
+
+### signup classic
+POST http://localhost:3000/signup
+Content-Type: application/json
+
+{
+    "email": "toto@tata.com",
+    "first_name": "toto",
+    "last_name": "tata",
+    "password": "TotoTata!123"
+}
