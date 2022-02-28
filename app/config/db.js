@@ -6,7 +6,7 @@ const config = {};
 if (process.env.NODE_ENV === 'production') {
     config.connectionString = process.env.DATABASE_URL;
     config.ssl = {
-        rejectUnauthorizid: false,
+        rejectUnauthorized: false,
     };
 }
 
