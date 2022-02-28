@@ -1,5 +1,9 @@
 @endpoint = http://localhost:{{$dotenv PORT}}
 
+####################################################
+#                       Valid
+####################################################
+
 ### signup
 POST {{ endpoint }}/signup
 Content-Type: application/json
@@ -8,14 +12,19 @@ Content-Type: application/json
     "email": "toto@tata.com",
     "first_name": "toto",
     "last_name": "tata",
-    "password": "TotoTata!123"
+    "password": "TotoTata!123",
+    "passwordConfirm": "TotoTata!123"
 }
 
 
 ### profil
-GET {{ endpoint }}/user/1/profil
+GET {{ endpoint }}/user/2/profil
 
-### signup classic
+####################################################
+#                       Errors
+####################################################
+
+### Alrady exists
 POST http://localhost:3000/signup
 Content-Type: application/json
 
@@ -23,5 +32,21 @@ Content-Type: application/json
     "email": "toto@tata.com",
     "first_name": "toto",
     "last_name": "tata",
-    "password": "TotoTata!123"
+    "password": "TotoTata!123",
+    "passwordConfirm": "TotoTata!123"
 }
+
+### Error props
+POST http://localhost:3000/signup
+Content-Type: application/json
+
+{
+    "emai": "toto@tata.com",
+    "first_name": "toto",
+    "last_name": "tata",
+    "password": "TotoTata!123",
+    "passwordConfirm": "TotoTata!123"
+}
+
+### 404
+GET {{ endpoint }}/user/2/profi

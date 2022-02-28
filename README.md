@@ -16,4 +16,11 @@ La plupart des gens ne prennent pas conscience de l’importance de leur quotidi
 
 - Install sqitch
 - Create database named "dyl"
+- Create sqitch.conf
 - sqitch deploy
+
+**run server**
+
+- npm i
+- create and fill .env
+- npm run dev
