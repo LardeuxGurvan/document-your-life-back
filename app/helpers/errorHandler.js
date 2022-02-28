@@ -1,5 +1,4 @@
 const ApiError = require('../errors/apiError');
-const WebsiteError = require('../errors/websiteError');
 
 const errorHandler = (err, res) => {
     let { statusCode, message } = err;
@@ -10,11 +9,16 @@ const errorHandler = (err, res) => {
 
     if (statusCode === 500 && res.app.get('env') !== 'development') {
         message = 'Internal Server Error';
+    } else {
+        res.status(statusCode).json({
+            status: 'error',
+            statusCode,
+            message,
+        });
     }
 };
 
 module.exports = {
     ApiError,
-    WebsiteError,
     errorHandler,
 };
