@@ -22,10 +22,15 @@ GET {{ endpoint }}/user/1/profil
 
 ### create card
 POST {{ endpoint }}/user/1/cards/today
+Content-Type: application/json
 
 {
-    "text": "carte teste",
+    "text": "carte teste 2",
+    "moodId": 4
 }
+
+### find card
+GET {{ endpoint }}/user/1/cards/1
 
 ####################################################
 #                       Errors

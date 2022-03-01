@@ -2,6 +2,7 @@
 
 BEGIN;
 
+DELETE FROM "card";
 DELETE FROM "mood";
 
 COMMIT;

@@ -11,18 +11,24 @@ module.exports = {
         return result.rows[0];
     },
 
-    // async findByDateAndUser(timestamp, userId) {
-    //     const result =
-    // },
+    async findLatestByUserPk(userId) {
+        const result = await client.query('SELECT * FROM "card" WHERE "user_id" = $1 ORDER BY "created_at" DESC LIMIT 1', [userId]);
+        if (result.rowCount === 0) {
+            return null;
+        }
 
-    async create(text, video, audio, image, userId) {
+        return result.rows[0];
+    },
+
+    async create(text, video, audio, image, moodId, userId) {
         const savedCard = await client.query(
-            'INSERT INTO "card" ("text", "video", "audio", "image", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING *',
+            'INSERT INTO "card" ("text", "video", "audio", "image", "mood_id", "user_id") VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
             [
                 text,
                 video,
                 audio,
                 image,
+                moodId,
                 userId,
             ],
         );

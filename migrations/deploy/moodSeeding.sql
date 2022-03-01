@@ -3,9 +3,9 @@
 BEGIN;
 
 INSERT INTO "mood" ("label")
-    VALUES  ('happy'),
+    VALUES  ('nutral'),
+            ('happy'),
             ('sad'),
-            ('cool'),
-            ('nutral');
+            ('cool');
 
 COMMIT;

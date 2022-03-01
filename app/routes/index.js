@@ -9,7 +9,7 @@ const router = express.Router();
 router.post('/signup', controllerHandler(userController.signupAction));
 router.get('/user/:userId(\\d+)/profil', controllerHandler(userController.profil));
 router.post('/login', controllerHandler(userController.login));
-// router.get('/user/:userId(\\d+)/cards/:cardId(\\d+)', controllerHandler(card))
+router.get('/user/:userId(\\d+)/cards/:cardId(\\d+)', controllerHandler(cardController.getCard));
 router.post('/user/:userId(\\d+)/cards/today', controllerHandler(cardController.create));
 
 router.use(() => {
