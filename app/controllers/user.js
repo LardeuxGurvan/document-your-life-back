@@ -1,8 +1,8 @@
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 const userDataMapper = require('../models/user');
 const { ApiError } = require('../helpers/errorHandler');
-const { generateLimitedAccessToken, generateAccessToken } = require('../helpers/generatedToken');
+const generateAccessToken = require('../helpers/generatedToken');
+const refreshAccessToken = require('../helpers/generatedToken');
 
 const userController = {
 
@@ -55,31 +55,14 @@ const userController = {
         if (!validPwd) {
             throw new ApiError(400, 'Connection information is invalid');
         }
-
-        const limitedAccessToken = generateLimitedAccessToken(user);
-
-        return res.json({
-            message: 'login',
-            limitedToken: limitedAccessToken,
-        });
-    },
-
-    authenticateToken(req, res, next) {
-        console.log('utilisateur : ', req.params);
-        const authHeader = req.headers.authorization;
-        console.log(' requete dans le header', req.headers.authorization);
-        const token = authHeader && authHeader.split(' ')[1];
-        console.log('token : ', token);
-        if (token == null) {
-            return res.send('rien de present');
-        }
-        jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-            if (err) {
-                return res.send('erreur 403');
-            }
-            req.params = user;
-            next();
-        });
+        const tokenGenerated = generateAccessToken(user);
+        const refreshTokenGenerated = refreshAccessToken(user);
+        return res
+            .json({
+                message: 'login',
+                tokenGenerated,
+                refreshTokenGenerated,
+            });
     },
 
 };

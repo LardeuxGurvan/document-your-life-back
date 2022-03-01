@@ -1,29 +1,8 @@
+require('dotenv').config();
 const jwt = require('jsonwebtoken');
 
-const generateLimitedAccessToken = (user) => {
-    const userGeneratedToken = jwt.sign(
-        {
-            userEmail: user.email,
-        },
-        process.env.REFRESH_TOKKEN_SECRET,
-    );
-    return userGeneratedToken;
-};
+function generateAccessToken(user) {
+    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1800s' });
+}
 
-const generateAccessToken = (user) => {
-    const userGeneratedToken = jwt.sign(
-        {
-            userId: user.id,
-            userEmail: user.email,
-            userFirstName: user.first_name,
-            userLastName: user.last_name,
-        },
-        process.env.ACCESS_TOKEN_SECRET,
-    );
-    return userGeneratedToken;
-};
-
-module.exports = {
-    generateLimitedAccessToken,
-    generateAccessToken,
-};
+module.exports = generateAccessToken;
