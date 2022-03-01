@@ -18,7 +18,7 @@ Content-Type: application/json
 
 
 ### profil
-GET {{ endpoint }}/user/2/profil
+GET {{ endpoint }}/user/1/profil
 
 ####################################################
 #                       Errors

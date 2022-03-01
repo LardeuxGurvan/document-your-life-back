@@ -22,7 +22,12 @@ if (app.get('env') === 'production') {
 app.use(session(sess));
 
 app.use((request, response, next) => {
+    console.log('######################################');
+    console.log('request infos : ', request.session);
     response.locals.connectedUser = request.session.connectedUser;
+    console.log('######################################');
+    console.log('response infos : ', response.locals);
+    console.log('######################################');
 
     next();
 });
