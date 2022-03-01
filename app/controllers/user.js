@@ -42,6 +42,22 @@ const userController = {
         return res.json(newUser);
     },
 
+    async login(req, res) {
+        const user = await userDataMapper.findByEmail(req.body.email);
+        if (!user) {
+            throw new ApiError(400, "User doesn't exists");
+        }
+
+        const validPwd = await bcrypt.compare(req.body.password, user.password);
+        if (!validPwd) {
+            throw new ApiError(400, 'Connection information is invalid');
+        }
+
+        // TODO token session access
+
+        return res.json({ message: 'login' });
+    },
+
 };
 
 module.exports = userController;

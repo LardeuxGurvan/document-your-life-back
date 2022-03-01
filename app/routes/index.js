@@ -10,11 +10,12 @@ router.post('/signup', controllerHandler(userController.signupAction));
 router.get('/user/:userId/profil', controllerHandler(userController.profil));
 router.post('/login', controllerHandler(userController.login));
 
-router.use(() => {
-    throw new ApiError(404, 'API Route not found');
-});
 router.use((err, _, response, next) => {
     errorHandler(err, response, next);
+});
+
+router.use(() => {
+    throw new ApiError(404, 'API Route not found');
 });
 
 module.exports = router;
