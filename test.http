@@ -19,6 +19,17 @@ Content-Type: application/json
 
 ### profil
 GET {{ endpoint }}/user/1/profil
+Authorization: 
+
+### utilisateur
+POST {{ endpoint }}/login
+Content-Type: application/json
+
+{
+    "email": "toto@tata.com",
+    "password": "TotoTata!123"
+}
+
 
 ####################################################
 #                       Errors

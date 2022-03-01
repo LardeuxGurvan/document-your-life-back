@@ -1,10 +1,11 @@
 const express = require('express');
 const cors = require('cors');
+const bodyParser = require('body-parser');
 const session = require('express-session');
 const router = require('./routes');
 
 const app = express();
-
+app.use(bodyParser.json());
 app.use(express.json());
 
 app.use(cors(process.env.CORS_DOMAINS ?? '*'));
@@ -22,15 +23,12 @@ if (app.get('env') === 'production') {
 app.use(session(sess));
 
 app.use((request, response, next) => {
-    console.log('######################################');
-    console.log('request infos : ', request.session);
+    console.log('local utilisateur : ', response.locals);
     response.locals.connectedUser = request.session.connectedUser;
-    console.log('######################################');
-    console.log('response infos : ', response.locals);
-    console.log('######################################');
 
     next();
 });
+
 
 app.use(router);
 

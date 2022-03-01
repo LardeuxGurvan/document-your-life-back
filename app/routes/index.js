@@ -7,7 +7,7 @@ const { errorHandler } = require('../helpers/errorHandler');
 const router = express.Router();
 
 router.post('/signup', controllerHandler(userController.signupAction));
-router.get('/user/:userId/profil', controllerHandler(userController.profil));
+router.get('/user/:userId/profil', userController.authenticateToken, controllerHandler(userController.profil));
 router.post('/login', controllerHandler(userController.login));
 
 router.use((err, _, response, next) => {
