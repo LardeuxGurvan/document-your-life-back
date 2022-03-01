@@ -20,11 +20,18 @@ Content-Type: application/json
 ### profil
 GET {{ endpoint }}/user/1/profil
 
+### create card
+POST {{ endpoint }}/user/1/cards/today
+
+{
+    "text": "carte teste",
+}
+
 ####################################################
 #                       Errors
 ####################################################
 
-### Alrady exists
+### Already exists
 POST http://localhost:3000/signup
 Content-Type: application/json
 
