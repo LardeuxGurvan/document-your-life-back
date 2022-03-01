@@ -30,7 +30,8 @@ function refreshAuthenticateToken(req, res) {
             return res.sendStatus(401);
         }
         delete user.iat;
-        const refreshedToken = userToken;
+        console.log('token actualiser : ', userToken);
+        const refreshedToken = userToken(user);
         res.send({
             accessToken: refreshedToken,
         });

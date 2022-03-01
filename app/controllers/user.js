@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt');
 const userDataMapper = require('../models/user');
 const { ApiError } = require('../helpers/errorHandler');
 const generateAccessToken = require('../helpers/generatedToken');
-const refreshAccessToken = require('../helpers/generatedToken');
+const refreshAccessToken = require('../helpers/refreshToken');
 
 const userController = {
 

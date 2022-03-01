@@ -19,7 +19,7 @@ Content-Type: application/json
 
 ### profil
 GET {{ endpoint }}/user/1/profil
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0b3RvQHRhdGEuY29tIiwiZmlyc3RfbmFtZSI6InRvdG8iLCJsYXN0X25hbWUiOiJ0YXRhIiwicGFzc3dvcmQiOiIkMmIkMTAkWkRuTmJ1S0NucmRUSU1vVy90aktZT0Nha293TXZFYnFiN0FLSW5pdlh2RmQwUVFKNW9JVEMiLCJpbWFnZSI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMjItMDMtMDFUMTM6NDQ6MDYuODM0WiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY0NjE3NDk5NywiZXhwIjoxNjQ2MTc2Nzk3fQ.TOrbu5DPsbzdkiBPwYPIYjo6u5yYyYQEyT2L9t3qoUE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0b3RvQHRhdGEuY29tIiwiZmlyc3RfbmFtZSI6InRvdG8iLCJsYXN0X25hbWUiOiJ0YXRhIiwicGFzc3dvcmQiOiIkMmIkMTAkWkRuTmJ1S0NucmRUSU1vVy90aktZT0Nha293TXZFYnFiN0FLSW5pdlh2RmQwUVFKNW9JVEMiLCJpbWFnZSI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMjItMDMtMDFUMTM6NDQ6MDYuODM0WiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY0NjE3NzAyMCwiZXhwIjoxNjQ2MTc4ODIwfQ.QnE7sUtkSzmQz2mm1s9U1SQhBZK8OWNG-3W2EwzH9x4
 
 ### utilisateur
 POST {{ endpoint }}/login
@@ -30,6 +30,11 @@ Content-Type: application/json
     "password": "TotoTata!123"
 }
 
+### refresh token route
+
+### utilisateur
+POST {{ endpoint }}/api/refreshtoken
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0b3RvQHRhdGEuY29tIiwiZmlyc3RfbmFtZSI6InRvdG8iLCJsYXN0X25hbWUiOiJ0YXRhIiwicGFzc3dvcmQiOiIkMmIkMTAkWkRuTmJ1S0NucmRUSU1vVy90aktZT0Nha293TXZFYnFiN0FLSW5pdlh2RmQwUVFKNW9JVEMiLCJpbWFnZSI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMjItMDMtMDFUMTM6NDQ6MDYuODM0WiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY0NjE3NjcwNH0.cPEhzB0oWtgA-z2p0PTDmrXbjmvIAA-BHHamO8uy97E
 
 ####################################################
 #                       Errors
