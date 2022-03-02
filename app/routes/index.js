@@ -20,10 +20,6 @@ router.get('/user/:userId(\\d+)/cards/:cardId(\\d+)', authenticateToken, control
 // Refresh token
 router.post('/api/refreshToken', refreshAuthenticateToken);
 
-router.use((err, _, response, next) => {
-    errorHandler(err, response, next);
-});
-
 router.use(() => {
     throw new ApiError(404, 'API Route not found');
 });
