@@ -35,7 +35,7 @@ module.exports = {
         } = req.body;
 
         // entire card cannot be empty
-        if (!text && !video && !audio && !image) {
+        if (!text && !video && !audio && !image && !moodId) {
             throw new ApiError(403, 'At least one medium must be filled');
         }
 
@@ -49,7 +49,7 @@ module.exports = {
                 video,
                 audio,
                 image,
-                Number(moodId),
+                moodId,
                 Number(userId),
             );
             return res.json(result);
@@ -86,7 +86,7 @@ module.exports = {
         } = req.body;
 
         // At least one medium must be changed
-        if (!text && !video && !audio && !image) {
+        if (!text && !video && !audio && !image && !moodId) {
             throw new ApiError(403, 'At least one medium must be changed');
         }
 
@@ -107,15 +107,8 @@ module.exports = {
         }
 
         // update card
-        const result = await cardDataMapper.update(
-            text,
-            video,
-            audio,
-            image,
-            Number(moodId),
-            Number(userId),
-        );
-        return res.json(result);
+        const savedResult = await cardDataMapper.update(lastCard.id, req.body);
+        return res.json(savedResult);
     },
 
 };

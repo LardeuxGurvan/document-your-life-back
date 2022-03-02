@@ -9,7 +9,7 @@ POST {{ endpoint }}/signup
 Content-Type: application/json
 
 {
-    "email": "toto@tata.com",
+    "email": "bonjour@tata.com",
     "first_name": "toto",
     "last_name": "tata",
     "password": "TotoTata!123",
@@ -18,7 +18,7 @@ Content-Type: application/json
 
 
 ### profil
-GET {{ endpoint }}/user/1/profil
+GET {{ endpoint }}/user/3/profil
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0b3RvQHRhdGEuY29tIiwiZmlyc3RfbmFtZSI6InRvdG8iLCJsYXN0X25hbWUiOiJ0YXRhIiwicGFzc3dvcmQiOiIkMmIkMTAkWkRuTmJ1S0NucmRUSU1vVy90aktZT0Nha293TXZFYnFiN0FLSW5pdlh2RmQwUVFKNW9JVEMiLCJpbWFnZSI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMjItMDMtMDFUMTM6NDQ6MDYuODM0WiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY0NjIxMDY4MiwiZXhwIjoxNjQ2MjEyNDgyfQ.zBp4O67Hbr1p0oay3ZNMOTCofRTzb99Wtj2SYgI92pg
 
 ### utilisateur
@@ -26,7 +26,7 @@ POST {{ endpoint }}/login
 Content-Type: application/json
 
 {
-    "email": "toto@tata.com",
+    "email": "bonjour@tata.com",
     "password": "TotoTata!123"
 }
 
@@ -42,15 +42,26 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiO
 
 ### create card
 POST {{ endpoint }}/user/1/cards/today
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJib25qb3VyQHRhdGEuY29tIiwiZmlyc3RfbmFtZSI6InRvdG8iLCJsYXN0X25hbWUiOiJ0YXRhIiwicGFzc3dvcmQiOiIkMmIkMTAkRnRXdDJUWU04SXRvVVg5THE2QjRSZTc2QkZSZW1Hc0MvbURqRlJZVDNaOXh5cDIwTmwzc2kiLCJpbWFnZSI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMjItMDMtMDJUMTM6NTQ6MTguNjUzWiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY0NjIyOTI2NywiZXhwIjoxNjQ2MjMxMDY3fQ.SpucK1J-oIYkPSBIZ92FUhxcG5y8E-7VEzVv8WCa_Qw
 Content-Type: application/json
 
 {
-    "text": "carte teste 2",
-    "moodId": 4
+    "text": "carte teste 3"
+}
+
+### update card
+PATCH {{ endpoint }}/user/1/cards/today
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJib25qb3VyQHRhdGEuY29tIiwiZmlyc3RfbmFtZSI6InRvdG8iLCJsYXN0X25hbWUiOiJ0YXRhIiwicGFzc3dvcmQiOiIkMmIkMTAkRnRXdDJUWU04SXRvVVg5THE2QjRSZTc2QkZSZW1Hc0MvbURqRlJZVDNaOXh5cDIwTmwzc2kiLCJpbWFnZSI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMjItMDMtMDJUMTM6NTQ6MTguNjUzWiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY0NjIyOTI2NywiZXhwIjoxNjQ2MjMxMDY3fQ.SpucK1J-oIYkPSBIZ92FUhxcG5y8E-7VEzVv8WCa_Qw
+Content-Type: application/json
+
+{
+    "text": "Première",
+    "video": "essai patch"
 }
 
 ### find card
-GET {{ endpoint }}/user/1/cards/1
+GET {{ endpoint }}/user/1/cards/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJib25qb3VyQHRhdGEuY29tIiwiZmlyc3RfbmFtZSI6InRvdG8iLCJsYXN0X25hbWUiOiJ0YXRhIiwicGFzc3dvcmQiOiIkMmIkMTAkRnRXdDJUWU04SXRvVVg5THE2QjRSZTc2QkZSZW1Hc0MvbURqRlJZVDNaOXh5cDIwTmwzc2kiLCJpbWFnZSI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMjItMDMtMDJUMTM6NTQ6MTguNjUzWiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY0NjIyOTI2NywiZXhwIjoxNjQ2MjMxMDY3fQ.SpucK1J-oIYkPSBIZ92FUhxcG5y8E-7VEzVv8WCa_Qw
 
 ####################################################
 #                       Errors
