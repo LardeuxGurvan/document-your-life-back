@@ -36,4 +36,19 @@ module.exports = {
         return savedCard.rows[0];
     },
 
+    async update(text, video, audio, image, moodId, userId) {
+        const savedCard = await client.query(
+            'INSERT INTO "card" ("text", "video", "audio", "image", "mood_id", "user_id") VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
+            [
+                text,
+                video,
+                audio,
+                image,
+                moodId,
+                userId,
+            ],
+        );
+
+        return savedCard.rows[0];
+    },
 };

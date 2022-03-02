@@ -75,4 +75,47 @@ module.exports = {
         return res.json(result);
     },
 
+    async update(req, res) {
+        const { userId } = req.params;
+        const {
+            text,
+            video,
+            audio,
+            image,
+            moodId,
+        } = req.body;
+
+        // At least one medium must be changed
+        if (!text && !video && !audio && !image) {
+            throw new ApiError(403, 'At least one medium must be changed');
+        }
+
+        // find the last created card by user
+        const lastCard = await cardDataMapper.findLatestByUserPk(userId);
+
+        // check if user created card before
+        if (!lastCard) {
+            throw new ApiError(404, 'There is no card created before');
+        }
+
+        // Compares current date with the created date of last card created
+        const lastCardDate = lastCard.created_at.toISOString().split('T')[0];
+        const currentDate = new Date().toISOString().split('T')[0];
+
+        if (lastCardDate !== currentDate) {
+            throw new ApiError(403, 'this is not the daily card');
+        }
+
+        // update card
+        const result = await cardDataMapper.update(
+            text,
+            video,
+            audio,
+            image,
+            Number(moodId),
+            Number(userId),
+        );
+        return res.json(result);
+    },
+
 };
