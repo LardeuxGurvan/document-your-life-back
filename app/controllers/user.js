@@ -1,6 +1,8 @@
 const bcrypt = require('bcrypt');
 const userDataMapper = require('../models/user');
 const { ApiError } = require('../helpers/errorHandler');
+const generateAccessToken = require('../helpers/generatedToken');
+const refreshAccessToken = require('../helpers/refreshToken');
 
 const userController = {
 
@@ -44,6 +46,7 @@ const userController = {
 
     async login(req, res) {
         const user = await userDataMapper.findByEmail(req.body.email);
+
         if (!user) {
             throw new ApiError(400, "User doesn't exists");
         }
@@ -52,10 +55,19 @@ const userController = {
         if (!validPwd) {
             throw new ApiError(400, 'Connection information is invalid');
         }
+        const tokenGenerated = generateAccessToken(user);
+        const refreshTokenGenerated = refreshAccessToken(user);
+        return res
+            .json({
+                message: 'login',
+                tokenGenerated,
+                refreshTokenGenerated,
+            });
+    },
 
-        // TODO token session access
-
-        return res.json({ message: 'login' });
+    async logout(req, res) {
+        delete req.session.user;
+        return res.send('user logout');
     },
 
 };
