@@ -14,7 +14,10 @@ router.post('/logout', controllerHandler(userController.logout));
 
 // User routes (auth)
 router.get('/user/:userId(\\d+)/profil', authenticateToken, controllerHandler(userController.profil));
-router.post('/user/:userId(\\d+)/cards/today', authenticateToken, controllerHandler(cardController.create));
+router.route('/user/:userId(\\d+)/cards/today')
+    .post(authenticateToken, controllerHandler(cardController.create))
+    .patch(authenticateToken, controllerHandler(cardController.update));
+
 router.get('/user/:userId(\\d+)/cards/:cardId(\\d+)', authenticateToken, controllerHandler(cardController.getCard));
 
 // Refresh token
