@@ -16,7 +16,6 @@ CREATE TABLE "user" (
 CREATE TABLE "mood" (
   "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   "label" TEXT NOT NULL UNIQUE,
-  "color" TEXT NOT NULL UNIQUE,
   "created_at" TIMESTAMPTZ DEFAULT now(),
   "updated_at" TIMESTAMPTZ
 );
@@ -28,7 +27,7 @@ CREATE TABLE "card" (
   "audio" TEXT,
   "image" TEXT,
   "user_id" INT NOT NULL REFERENCES "user"("id"),
-  "mood_id" INT NOT NULL REFERENCES "mood"("id"),
+  "mood_id" INT NOT NULL REFERENCES "mood"("id") DEFAULT 1,
   "created_at" TIMESTAMPTZ DEFAULT now(),
   "updated_at" TIMESTAMPTZ
 );

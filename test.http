@@ -40,11 +40,23 @@ POST {{ endpoint }}/logout
 POST {{ endpoint }}/api/refreshtoken
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0b3RvQHRhdGEuY29tIiwiZmlyc3RfbmFtZSI6InRvdG8iLCJsYXN0X25hbWUiOiJ0YXRhIiwicGFzc3dvcmQiOiIkMmIkMTAkWkRuTmJ1S0NucmRUSU1vVy90aktZT0Nha293TXZFYnFiN0FLSW5pdlh2RmQwUVFKNW9JVEMiLCJpbWFnZSI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMjItMDMtMDFUMTM6NDQ6MDYuODM0WiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY0NjIxMDY0OCwiZXhwIjoxNjQ2MjEyNDQ4fQ.3DyKD89z7PrnmjPZ16g35InEoBz8119kmL_j7_uZ3XI
 
+### create card
+POST {{ endpoint }}/user/1/cards/today
+Content-Type: application/json
+
+{
+    "text": "carte teste 2",
+    "moodId": 4
+}
+
+### find card
+GET {{ endpoint }}/user/1/cards/1
+
 ####################################################
 #                       Errors
 ####################################################
 
-### Alrady exists
+### Already exists
 POST http://localhost:3000/signup
 Content-Type: application/json
 
