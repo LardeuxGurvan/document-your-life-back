@@ -10,6 +10,8 @@ const router = express.Router();
 router.post('/signup', controllerHandler(userController.signupAction));
 router.get('/user/:userId/profil', authenticateToken, controllerHandler(userController.profil));
 router.post('/login', controllerHandler(userController.login));
+router.post('/logout', controllerHandler(userController.logout));
+router.get('/user/:userId/dashboard', controllerHandler());
 router.post('/api/refreshtoken', refreshAuthenticateToken);
 
 router.use((err, _, response, next) => {

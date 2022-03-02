@@ -65,6 +65,11 @@ const userController = {
             });
     },
 
+    async logout(req, res) {
+        delete req.session.user;
+        return res.send('user logout');
+    },
+
 };
 
 module.exports = userController;

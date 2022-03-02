@@ -19,7 +19,7 @@ Content-Type: application/json
 
 ### profil
 GET {{ endpoint }}/user/1/profil
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0b3RvQHRhdGEuY29tIiwiZmlyc3RfbmFtZSI6InRvdG8iLCJsYXN0X25hbWUiOiJ0YXRhIiwicGFzc3dvcmQiOiIkMmIkMTAkWkRuTmJ1S0NucmRUSU1vVy90aktZT0Nha293TXZFYnFiN0FLSW5pdlh2RmQwUVFKNW9JVEMiLCJpbWFnZSI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMjItMDMtMDFUMTM6NDQ6MDYuODM0WiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY0NjE3NzAyMCwiZXhwIjoxNjQ2MTc4ODIwfQ.QnE7sUtkSzmQz2mm1s9U1SQhBZK8OWNG-3W2EwzH9x4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0b3RvQHRhdGEuY29tIiwiZmlyc3RfbmFtZSI6InRvdG8iLCJsYXN0X25hbWUiOiJ0YXRhIiwicGFzc3dvcmQiOiIkMmIkMTAkWkRuTmJ1S0NucmRUSU1vVy90aktZT0Nha293TXZFYnFiN0FLSW5pdlh2RmQwUVFKNW9JVEMiLCJpbWFnZSI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMjItMDMtMDFUMTM6NDQ6MDYuODM0WiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY0NjIxMDY4MiwiZXhwIjoxNjQ2MjEyNDgyfQ.zBp4O67Hbr1p0oay3ZNMOTCofRTzb99Wtj2SYgI92pg
 
 ### utilisateur
 POST {{ endpoint }}/login
@@ -30,11 +30,15 @@ Content-Type: application/json
     "password": "TotoTata!123"
 }
 
+### utilisateur logout 
+POST {{ endpoint }}/logout
+
+
 ### refresh token route
 
 ### utilisateur
 POST {{ endpoint }}/api/refreshtoken
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0b3RvQHRhdGEuY29tIiwiZmlyc3RfbmFtZSI6InRvdG8iLCJsYXN0X25hbWUiOiJ0YXRhIiwicGFzc3dvcmQiOiIkMmIkMTAkWkRuTmJ1S0NucmRUSU1vVy90aktZT0Nha293TXZFYnFiN0FLSW5pdlh2RmQwUVFKNW9JVEMiLCJpbWFnZSI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMjItMDMtMDFUMTM6NDQ6MDYuODM0WiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY0NjE3NjcwNH0.cPEhzB0oWtgA-z2p0PTDmrXbjmvIAA-BHHamO8uy97E
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0b3RvQHRhdGEuY29tIiwiZmlyc3RfbmFtZSI6InRvdG8iLCJsYXN0X25hbWUiOiJ0YXRhIiwicGFzc3dvcmQiOiIkMmIkMTAkWkRuTmJ1S0NucmRUSU1vVy90aktZT0Nha293TXZFYnFiN0FLSW5pdlh2RmQwUVFKNW9JVEMiLCJpbWFnZSI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMjItMDMtMDFUMTM6NDQ6MDYuODM0WiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY0NjIxMDY0OCwiZXhwIjoxNjQ2MjEyNDQ4fQ.3DyKD89z7PrnmjPZ16g35InEoBz8119kmL_j7_uZ3XI
 
 ####################################################
 #                       Errors
