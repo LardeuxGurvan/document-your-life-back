@@ -82,11 +82,11 @@ module.exports = {
             video,
             audio,
             image,
-            moodId,
+            mood_Id,
         } = req.body;
 
         // At least one medium must be changed
-        if (!text && !video && !audio && !image && !moodId) {
+        if (!text && !video && !audio && !image && !mood_Id) {
             throw new ApiError(403, 'At least one medium must be changed');
         }
 

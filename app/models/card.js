@@ -20,9 +20,9 @@ module.exports = {
         return result.rows[0];
     },
 
-    async create(text, video, audio, image, moodId, userId) {
-        if (!moodId) {
-            moodId = 1;
+    async create(text, video, audio, image, mood_id, user_id) {
+        if (!mood_id) {
+            mood_id = 1;
         }
         const savedCard = await client.query(
             'INSERT INTO "card" ("text", "video", "audio", "image", "mood_id", "user_id") VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
@@ -31,8 +31,8 @@ module.exports = {
                 video,
                 audio,
                 image,
-                moodId,
-                userId,
+                mood_id,
+                user_id,
             ],
         );
 
