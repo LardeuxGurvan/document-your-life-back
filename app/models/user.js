@@ -1,4 +1,5 @@
 const client = require('../config/db');
+const { ApiError } = require('../helpers/errorHandler');
 
 module.exports = {
 
@@ -41,6 +42,17 @@ module.exports = {
         }
 
         return result.rows[0];
+    },
+
+    async update(id, user) {
+        const result = await client.query('SELECT * FROM "user" WHERE id = $1', [id]);
+        if (result.rowCount === 0) {
+            throw new ApiError(400, 'This user does not exists');
+        }
+
+        const oldUser = result.rows[0];
+        const newUser = { ...oldUser, ...user };
+        return newUser;
     },
 
 };

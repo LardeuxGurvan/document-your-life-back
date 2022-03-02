@@ -17,6 +17,24 @@ const userController = {
 
         return res.json(user);
     },
+    async updateProfil(req, res) {
+        const savedProfil = await userDataMapper.update(req.params.userId, req.body);
+        let oldProfil = await userDataMapper.findByPk(Number(req.params.userId));
+
+        // Password confirm does not match
+        if (req.body.password !== req.body.passwordConfirm) {
+            throw new ApiError(400, 'Password does not match with password confirm');
+        }
+
+        // Hash with bcrypt
+        const salt = await bcrypt.genSalt(10);
+        const encryptedPassword = await bcrypt.hash(req.body.password, salt);
+
+        console.log('ancien profil : ', oldProfil);
+        oldProfil = savedProfil;
+        console.log('ancien profil modifier : ', oldProfil);
+        return res.json(oldProfil, encryptedPassword);
+    },
 
     async signupAction(req, res) {
         // User already exists
