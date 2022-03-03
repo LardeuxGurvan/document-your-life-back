@@ -81,6 +81,7 @@ const userController = {
         const refreshTokenGenerated = refreshAccessToken(user);
         return res
             .json({
+                userId: user.id,
                 message: 'login',
                 tokenGenerated,
                 refreshTokenGenerated,
