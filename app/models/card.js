@@ -5,7 +5,7 @@ module.exports = {
 
     // Find card by id
     async findByPk(cardId) {
-        const result = await client.query('SELECT * FROM "card" WHERE id = $1', [cardId]);
+        const result = await client.query('SELECT "card".*, "mood"."label" as moodLabel FROM "card" JOIN "mood" ON "card"."mood_id" = "mood"."id" WHERE "card".id = $1', [cardId]);
         if (result.rowCount === 0) {
             return null;
         }

@@ -9,17 +9,17 @@ POST {{ endpoint }}/signup
 Content-Type: application/json
 
 {
-    "email": "toto@tatf.com",
+    "email": "toto@tatd.com",
     "first_name": "toto",
     "last_name": "tata",
-    "password": "TotoTata!1",
+    "password": "TotoTata!123",
     "passwordConfirm": "TotoTata!123"
 }
 
 
 ### profil
-GET {{ endpoint }}/user/4/profil
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJ0b3RvQHRhdGYuY29tIiwiZmlyc3RfbmFtZSI6InRvdG8iLCJsYXN0X25hbWUiOiJ0YXRhIiwicGFzc3dvcmQiOiIkMmIkMTAka3g1LzZKOFNXVG5hWkNJd0JKNDhZT0lWNXpvZ2RKMHlRTHViZTRWaTZSTWNCdmJrd0d5THUiLCJpbWFnZSI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMjItMDMtMDNUMTA6MjQ6MjguOTk5WiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY0NjMwMzE1MCwiZXhwIjoxNjQ2MzA0OTUwfQ.O6AdJZQQ1AgxWmXiHI0_N7OH5Wm6lHAh0QOEmYtc6CE
+GET {{ endpoint }}/user/1/profil
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0b3RvQHRhdGRmLmNvbSIsImZpcnN0X25hbWUiOiJ0b3RvIiwibGFzdF9uYW1lIjoidGF0YSIsInBhc3N3b3JkIjoiJDJiJDEwJFlMWEVpdjFtZWNQczRkV2lJak5SYWVab2xLVk1SMnNjSmphTVRUZGJkeTJkUElBL0RwZ1MyIiwiaW1hZ2UiOm51bGwsImNyZWF0ZWRfYXQiOiIyMDIyLTAzLTAzVDE0OjI0OjIwLjYwMloiLCJ1cGRhdGVkX2F0IjpudWxsLCJpYXQiOjE2NDYzMjQ1NTEsImV4cCI6MTY0NjMyNjM1MX0.kvh2EFNP2aYZGlLHv9txiVLBxDKrIxBpBocAoC6KRdg
 
 
 
@@ -42,7 +42,7 @@ POST {{ endpoint }}/login
 Content-Type: application/json
 
 {
-    "email": "bonjours@tata.com",
+    "email": "toto@tatdf.com",
     "password": "TotoTata!123"
 }
 
@@ -57,15 +57,12 @@ POST {{ endpoint }}/api/refreshtoken
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJib25qb3Vyc0B0YXRhLmNvbSIsImZpcnN0X25hbWUiOiJ0b3RvIiwibGFzdF9uYW1lIjoidGF0YSIsInBhc3N3b3JkIjoiJDJiJDEwJHdsZkNzdGRvTndXR3UuTjBnRExRVHVmdUhJcHBQRS94UHVhVHRCUFczZ0hQb0Y4NE1BQXlpIiwiaW1hZ2UiOm51bGwsImNyZWF0ZWRfYXQiOiIyMDIyLTAzLTAzVDEwOjAyOjE3LjU2MFoiLCJ1cGRhdGVkX2F0IjpudWxsLCJpYXQiOjE2NDYzMDE3NDMsImV4cCI6MTY0NjMwMzU0M30.uMDjq2YcWiRIFrBEPskay7RDmcW7xto16J_N4naWDCk
 
 ### create card
-
 POST {{ endpoint }}/user/1/cards/today
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJib25qb0B0YXRhLmNvbSIsImZpcnN0X25hbWUiOiJ0b3RvIiwibGFzdF9uYW1lIjoidGF0YSIsInBhc3N3b3JkIjoiJDJiJDEwJEhnZXZXVHVjeXFYVW9aMFFwVlBHZU9lWGpGWFpydUU4RjV4aE5IQ2FrdG40UnBtYVd6RTVPIiwiaW1hZ2UiOm51bGwsImNyZWF0ZWRfYXQiOiIyMDIyLTAzLTAyVDE0OjQ5OjI2LjM3MFoiLCJ1cGRhdGVkX2F0IjpudWxsLCJpYXQiOjE2NDYyMzI1NzEsImV4cCI6MTY0NjIzNDM3MX0.wyEosZ4RRUTyHdALb0iOz6fzs2Q5YgYXvOey_wqwsQg
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJ0b3RvQHRhdGRmLmNvbSIsImZpcnN0X25hbWUiOiJ0b3RvIiwibGFzdF9uYW1lIjoidGF0YSIsInBhc3N3b3JkIjoiJDJiJDEwJHhDLktwTW52UDcwdE9Hb2JGc1BTYk9Gd2t3MzdaOFJnYnZLVkM0Y3RTVXZ6UDRiaS9Ycy9DIiwiaW1hZ2UiOm51bGwsImNyZWF0ZWRfYXQiOiIyMDIyLTAzLTAzVDE0OjEwOjQ0Ljg0MVoiLCJ1cGRhdGVkX2F0IjpudWxsLCJpYXQiOjE2NDYzMTY2NzMsImV4cCI6MTY0NjMxODQ3M30.tDr90UQcVWXh060bDYAY2Z1qtDKicIaiziA8pLD7eYc
 Content-Type: application/json
 
 {
-    "text": "carte teste 3",
-    "moodLabel": "happy"
+    "image": "coucou"
 }
 
 ### update card

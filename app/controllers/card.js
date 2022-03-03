@@ -76,7 +76,6 @@ module.exports = {
         return res.json(result);
     },
 
-
     async getAllElement(req, res) {
         const { userId } = req.params;
         const user = await userDataMapper.findByPk(Number(userId));
@@ -101,19 +100,16 @@ module.exports = {
             mood: allCardMood,
         });
     },
-  
+
     async update(req, res) {
         const { userId } = req.params;
         const {
             text,
-            video,
-            audio,
-            image,
             moodLabel,
         } = req.body;
 
         // At least one medium must be changed
-        if (!text && !video && !audio && !image && !moodLabel) {
+        if (!text && !req.file && !moodLabel) {
             throw new ApiError(403, 'At least one medium must be changed');
         }
 
@@ -131,6 +127,27 @@ module.exports = {
 
         if (lastCardDate !== currentDate) {
             throw new ApiError(403, 'this is not the daily card');
+        }
+
+        // Check if the request contains file
+        if (req.file) {
+            switch (req.file.fieldname) {
+            // add path to the body data
+            case 'image':
+                req.body.image = `${process.cwd()}/${req.file.path}`;
+                break;
+            case 'video':
+                req.body.video = `${process.cwd()}/${req.file.path}`;
+                break;
+            case 'audio':
+                req.body.audio = `${process.cwd()}/${req.file.path}`;
+                break;
+            default:
+                throw new ApiError(500, 'something went wrong');
+            }
+            req.body.image = `${process.cwd()}/${req.file.path}`;
+            console.log(`${process.cwd()}/${req.file.path}`);
+            console.log('file =>', req.file);
         }
 
         // update card
