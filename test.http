@@ -9,27 +9,32 @@ POST {{ endpoint }}/signup
 Content-Type: application/json
 
 {
-    "email": "bonjours@tata.com",
+    "email": "toto@tatf.com",
     "first_name": "toto",
     "last_name": "tata",
-    "password": "TotoTata!123",
+    "password": "TotoTata!1",
     "passwordConfirm": "TotoTata!123"
 }
 
 
 ### profil
+GET {{ endpoint }}/user/4/profil
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJ0b3RvQHRhdGYuY29tIiwiZmlyc3RfbmFtZSI6InRvdG8iLCJsYXN0X25hbWUiOiJ0YXRhIiwicGFzc3dvcmQiOiIkMmIkMTAka3g1LzZKOFNXVG5hWkNJd0JKNDhZT0lWNXpvZ2RKMHlRTHViZTRWaTZSTWNCdmJrd0d5THUiLCJpbWFnZSI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMjItMDMtMDNUMTA6MjQ6MjguOTk5WiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY0NjMwMzE1MCwiZXhwIjoxNjQ2MzA0OTUwfQ.O6AdJZQQ1AgxWmXiHI0_N7OH5Wm6lHAh0QOEmYtc6CE
 
-GET {{ endpoint }}/user/1/profil
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0b3RvQHRhdGEuY29tIiwiZmlyc3RfbmFtZSI6InRvdG8iLCJsYXN0X25hbWUiOiJ0YXRhIiwicGFzc3dvcmQiOiIkMmIkMTAkM3dnaC9VL3NsSEIybVNJNEZJcGZxT3BxZjhjcEJCdkUuMTQ3c3JDNzc3bVhidVJTaDBSREMiLCJpbWFnZSI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMjItMDMtMDJUMDk6MTg6MDQuNDEzWiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY0NjIzMDcxMSwiZXhwIjoxNjQ2MjMyNTExfQ.vr6pFZgNS2ePaMXjgxXg-kWTfdeRJLIiEjWo7lIGb0c
+
 
 ### update profil
-PATCH {{ endpoint }}/user/1/profil
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0b3RvQHRhdGEuY29tIiwiZmlyc3RfbmFtZSI6InRvdG8iLCJsYXN0X25hbWUiOiJ0YXRhIiwicGFzc3dvcmQiOiIkMmIkMTAkM3dnaC9VL3NsSEIybVNJNEZJcGZxT3BxZjhjcEJCdkUuMTQ3c3JDNzc3bVhidVJTaDBSREMiLCJpbWFnZSI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMjItMDMtMDJUMDk6MTg6MDQuNDEzWiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY0NjIzMzA0MSwiZXhwIjoxNjQ2MjM0ODQxfQ._uPXVKE4z9R5n_2PPGGEOtrzfvT_SaEiH8MPcSvpxf0
+PATCH {{ endpoint }}/user/4/profil
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJ0b3RvQHRhdGYuY29tIiwiZmlyc3RfbmFtZSI6InRvdG8iLCJsYXN0X25hbWUiOiJ0YXRhIiwicGFzc3dvcmQiOiIkMmIkMTAka3g1LzZKOFNXVG5hWkNJd0JKNDhZT0lWNXpvZ2RKMHlRTHViZTRWaTZSTWNCdmJrd0d5THUiLCJpbWFnZSI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMjItMDMtMDNUMTA6MjQ6MjguOTk5WiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY0NjMwMzE1MCwiZXhwIjoxNjQ2MzA0OTUwfQ.O6AdJZQQ1AgxWmXiHI0_N7OH5Wm6lHAh0QOEmYtc6CE
 Content-Type: application/json
 
 {
     "first_name": "didi",
-    "last_name": "dadada"
+    "last_name": "dadodi",
+    "password": "TotoTata!456",
+    "passwordConfirm": "TotoTata!456"
+
+
 }
 
 ### utilisateur
@@ -42,7 +47,7 @@ Content-Type: application/json
 }
 
 ### utilisateur logout 
-POST {{ endpoint }}/logout
+GET {{ endpoint }}/logout
 
 
 ### refresh token route
@@ -79,7 +84,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiO
 
 ### dashboard
 GET {{ endpoint }}/user/1/dashboard
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0b3RvQHRhdGEuY29tIiwiZmlyc3RfbmFtZSI6InRvdG8iLCJsYXN0X25hbWUiOiJ0YXRhIiwicGFzc3dvcmQiOiIkMmIkMTAkM3dnaC9VL3NsSEIybVNJNEZJcGZxT3BxZjhjcEJCdkUuMTQ3c3JDNzc3bVhidVJTaDBSREMiLCJpbWFnZSI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMjItMDMtMDJUMDk6MTg6MDQuNDEzWiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY0NjIyNjgwNywiZXhwIjoxNjQ2MjI4NjA3fQ.JtRE6kBO7BMcuOtPHXnpYN-BjIhRM7Y9hSQ586pKljk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0b3RvQHRhdGEuY29tIiwiZmlyc3RfbmFtZSI6InRvdG8iLCJsYXN0X25hbWUiOiJ0YXRhIiwicGFzc3dvcmQiOiIkMmIkMTAkM3dnaC9VL3NsSEIybVNJNEZJcGZxT3BxZjhjcEJCdkUuMTQ3c3JDNzc3bVhidVJTaDBSREMiLCJpbWFnZSI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMjItMDMtMDJUMDk6MTg6MDQuNDEzWiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY0NjI5NDgwOCwiZXhwIjoxNjQ2Mjk2NjA4fQ.hS9FDr1y3VdGAaOSCb7rHsWC_QrL801ETMYKjYvb56o
 ####################################################
 #                       Errors
 ####################################################

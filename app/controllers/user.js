@@ -18,22 +18,24 @@ const userController = {
         return res.json(user);
     },
     async updateProfil(req, res) {
-        const savedProfil = await userDataMapper.update(req.params.userId, req.body);
-        let oldProfil = await userDataMapper.findByPk(Number(req.params.userId));
+        // If Password change
+        if (req.body.password) {
+            // Password confirm does not match
+            if (req.body.password !== req.body.passwordConfirm) {
+                throw new ApiError(400, 'Password does not match with password confirm');
+            }
 
-        // Password confirm does not match
-        if (req.body.password !== req.body.passwordConfirm) {
-            throw new ApiError(400, 'Password does not match with password confirm');
+            // Hash with bcrypt
+            const salt = await bcrypt.genSalt(10);
+            const encryptedPassword = await bcrypt.hash(req.body.password, salt);
+            console.log('dans le cryptage du mp');
+            const savedProfil = await userDataMapper.update(req.params.userId, req.body, encryptedPassword);
+            return res.json(savedProfil);
         }
 
-        // Hash with bcrypt
-        const salt = await bcrypt.genSalt(10);
-        const encryptedPassword = await bcrypt.hash(req.body.password, salt);
-
-        console.log('ancien profil : ', oldProfil);
-        oldProfil = savedProfil;
-        console.log('ancien profil modifier : ', oldProfil);
-        return res.json(oldProfil, encryptedPassword);
+        const savedProfil = await userDataMapper.update(req.params.userId, req.body);
+        console.log('pas dedans');
+        return res.json(savedProfil);
     },
 
     async signupAction(req, res) {
@@ -89,8 +91,7 @@ const userController = {
     },
 
     async logout(req, res) {
-        delete req.session.user;
-        return res.send('user logout');
+        res.json('logout');
     },
 
 };
