@@ -9,7 +9,7 @@ POST {{ endpoint }}/signup
 Content-Type: application/json
 
 {
-    "email": "toto@tata.com",
+    "email": "bonjo@tata.com",
     "first_name": "toto",
     "last_name": "tata",
     "password": "TotoTata!123",
@@ -18,6 +18,7 @@ Content-Type: application/json
 
 
 ### profil
+
 GET {{ endpoint }}/user/1/profil
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0b3RvQHRhdGEuY29tIiwiZmlyc3RfbmFtZSI6InRvdG8iLCJsYXN0X25hbWUiOiJ0YXRhIiwicGFzc3dvcmQiOiIkMmIkMTAkM3dnaC9VL3NsSEIybVNJNEZJcGZxT3BxZjhjcEJCdkUuMTQ3c3JDNzc3bVhidVJTaDBSREMiLCJpbWFnZSI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMjItMDMtMDJUMDk6MTg6MDQuNDEzWiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY0NjIzMDcxMSwiZXhwIjoxNjQ2MjMyNTExfQ.vr6pFZgNS2ePaMXjgxXg-kWTfdeRJLIiEjWo7lIGb0c
 
@@ -37,7 +38,7 @@ POST {{ endpoint }}/login
 Content-Type: application/json
 
 {
-    "email": "toto@tata.com",
+    "email": "bonjo@tata.com",
     "password": "TotoTata!123"
 }
 
@@ -49,21 +50,33 @@ POST {{ endpoint }}/logout
 
 ### utilisateur
 POST {{ endpoint }}/api/refreshtoken
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0b3RvQHRhdGEuY29tIiwiZmlyc3RfbmFtZSI6InRvdG8iLCJsYXN0X25hbWUiOiJ0YXRhIiwicGFzc3dvcmQiOiIkMmIkMTAkWkRuTmJ1S0NucmRUSU1vVy90aktZT0Nha293TXZFYnFiN0FLSW5pdlh2RmQwUVFKNW9JVEMiLCJpbWFnZSI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMjItMDMtMDFUMTM6NDQ6MDYuODM0WiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY0NjIxMDY0OCwiZXhwIjoxNjQ2MjEyNDQ4fQ.3DyKD89z7PrnmjPZ16g35InEoBz8119kmL_j7_uZ3XI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJib25qb0B0YXRhLmNvbSIsImZpcnN0X25hbWUiOiJ0b3RvIiwibGFzdF9uYW1lIjoidGF0YSIsInBhc3N3b3JkIjoiJDJiJDEwJEhnZXZXVHVjeXFYVW9aMFFwVlBHZU9lWGpGWFpydUU4RjV4aE5IQ2FrdG40UnBtYVd6RTVPIiwiaW1hZ2UiOm51bGwsImNyZWF0ZWRfYXQiOiIyMDIyLTAzLTAyVDE0OjQ5OjI2LjM3MFoiLCJ1cGRhdGVkX2F0IjpudWxsLCJpYXQiOjE2NDYyMzI1NzEsImV4cCI6MTY0NjIzNDM3MX0.wyEosZ4RRUTyHdALb0iOz6fzs2Q5YgYXvOey_wqwsQg
 
 ### create card
 POST {{ endpoint }}/user/1/cards/today
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0b3RvQHRhdGEuY29tIiwiZmlyc3RfbmFtZSI6InRvdG8iLCJsYXN0X25hbWUiOiJ0YXRhIiwicGFzc3dvcmQiOiIkMmIkMTAkM3dnaC9VL3NsSEIybVNJNEZJcGZxT3BxZjhjcEJCdkUuMTQ3c3JDNzc3bVhidVJTaDBSREMiLCJpbWFnZSI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMjItMDMtMDJUMDk6MTg6MDQuNDEzWiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY0NjIxNzY5MCwiZXhwIjoxNjQ2MjE5NDkwfQ.Tuz5miXIRBNlpXTS9Su-1Tm86cpKqN0SQCnfPyvRSmE
+
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJib25qb0B0YXRhLmNvbSIsImZpcnN0X25hbWUiOiJ0b3RvIiwibGFzdF9uYW1lIjoidGF0YSIsInBhc3N3b3JkIjoiJDJiJDEwJEhnZXZXVHVjeXFYVW9aMFFwVlBHZU9lWGpGWFpydUU4RjV4aE5IQ2FrdG40UnBtYVd6RTVPIiwiaW1hZ2UiOm51bGwsImNyZWF0ZWRfYXQiOiIyMDIyLTAzLTAyVDE0OjQ5OjI2LjM3MFoiLCJ1cGRhdGVkX2F0IjpudWxsLCJpYXQiOjE2NDYyMzI1NzEsImV4cCI6MTY0NjIzNDM3MX0.wyEosZ4RRUTyHdALb0iOz6fzs2Q5YgYXvOey_wqwsQg
 Content-Type: application/json
 
 {
-    "text": "carte teste 2",
-    "moodId": 4
+    "text": "carte teste 3"
+}
+
+### update card
+PATCH {{ endpoint }}/user/1/cards/today
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJib25qb0B0YXRhLmNvbSIsImZpcnN0X25hbWUiOiJ0b3RvIiwibGFzdF9uYW1lIjoidGF0YSIsInBhc3N3b3JkIjoiJDJiJDEwJEhnZXZXVHVjeXFYVW9aMFFwVlBHZU9lWGpGWFpydUU4RjV4aE5IQ2FrdG40UnBtYVd6RTVPIiwiaW1hZ2UiOm51bGwsImNyZWF0ZWRfYXQiOiIyMDIyLTAzLTAyVDE0OjQ5OjI2LjM3MFoiLCJ1cGRhdGVkX2F0IjpudWxsLCJpYXQiOjE2NDYyMzI1NzEsImV4cCI6MTY0NjIzNDM3MX0.wyEosZ4RRUTyHdALb0iOz6fzs2Q5YgYXvOey_wqwsQg
+Content-Type: application/json
+
+{
+    "text": "Première",
+    "video": "essai patch",
+    "mood_id": 3
 }
 
 ### find card
 GET {{ endpoint }}/user/1/cards/1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0b3RvQHRhdGEuY29tIiwiZmlyc3RfbmFtZSI6InRvdG8iLCJsYXN0X25hbWUiOiJ0YXRhIiwicGFzc3dvcmQiOiIkMmIkMTAkM3dnaC9VL3NsSEIybVNJNEZJcGZxT3BxZjhjcEJCdkUuMTQ3c3JDNzc3bVhidVJTaDBSREMiLCJpbWFnZSI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMjItMDMtMDJUMDk6MTg6MDQuNDEzWiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY0NjIxNzY5MCwiZXhwIjoxNjQ2MjE5NDkwfQ.Tuz5miXIRBNlpXTS9Su-1Tm86cpKqN0SQCnfPyvRSmE
+
 
 ### dashboard
 GET {{ endpoint }}/user/1/dashboard
