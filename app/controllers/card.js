@@ -32,11 +32,11 @@ module.exports = {
             video,
             audio,
             image,
-            moodId,
+            moodLabel,
         } = req.body;
 
         // entire card cannot be empty
-        if (!text && !video && !audio && !image && !moodId) {
+        if (!text && !video && !audio && !image && !moodLabel) {
             throw new ApiError(403, 'At least one medium must be filled');
         }
 
@@ -50,7 +50,7 @@ module.exports = {
                 video,
                 audio,
                 image,
-                moodId,
+                moodLabel,
                 Number(userId),
             );
             return res.json(result);
@@ -70,7 +70,7 @@ module.exports = {
             video,
             audio,
             image,
-            Number(moodId),
+            moodLabel,
             Number(userId),
         );
         return res.json(result);
@@ -109,11 +109,11 @@ module.exports = {
             video,
             audio,
             image,
-            mood_Id,
+            moodLabel,
         } = req.body;
 
         // At least one medium must be changed
-        if (!text && !video && !audio && !image && !mood_Id) {
+        if (!text && !video && !audio && !image && !moodLabel) {
             throw new ApiError(403, 'At least one medium must be changed');
         }
 
