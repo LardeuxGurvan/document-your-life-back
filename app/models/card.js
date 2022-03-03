@@ -22,6 +22,21 @@ module.exports = {
 
         return result.rows[0];
     },
+    async findCardsByUserPk(userId) {
+        const result = await client.query('SELECT * FROM "card" WHERE "user_id" = $1 ORDER BY "created_at" DESC LIMIT 2', [userId]);
+        if (result.rowCount === 0) {
+            return null;
+        }
+
+        return result.rows;
+    },
+    async selectAllCardsMood(userId) {
+        const result = await client.query('SELECT card.id, user_id, mood.label, card.created_at FROM "card" INNER JOIN "mood" ON card.mood_id = mood.id WHERE "user_id" = $1 ORDER BY "created_at"', [userId]);
+        if (result.rowCount === 0) {
+            return null;
+        }
+        return result.rows;
+    },
 
     // Create card
     async create(text, video, audio, image, moodLabel, userId) {
