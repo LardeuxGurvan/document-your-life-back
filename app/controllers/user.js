@@ -65,14 +65,18 @@ const userController = {
     async login(req, res) {
         const user = await userDataMapper.findByEmail(req.body.email);
 
+        // Check user
         if (!user) {
             throw new ApiError(400, "User doesn't exists");
         }
 
+        // Check password
         const validPwd = await bcrypt.compare(req.body.password, user.password);
         if (!validPwd) {
             throw new ApiError(400, 'Connection information is invalid');
         }
+
+        // Generate unique token
         const tokenGenerated = generateAccessToken(user);
         const refreshTokenGenerated = refreshAccessToken(user);
         return res
