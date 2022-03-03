@@ -1,4 +1,5 @@
 node_modules
+test.http
 sqitch.conf
 package-lock.json
 .env
