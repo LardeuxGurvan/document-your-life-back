@@ -36,12 +36,31 @@ module.exports = {
         } = req.body;
 
         // entire card cannot be empty
-        if (!text && !video && !audio && !image && !moodLabel) {
+        if (!text && !req.file && !moodLabel) {
             throw new ApiError(403, 'At least one medium must be filled');
         }
 
         // find the last created card by user
         const lastCard = await cardDataMapper.findLatestByUserPk(userId);
+
+        // Check if the request contains file
+        if (req.file) {
+            switch (req.file.fieldname) {
+            // add path to the body data
+            case 'image':
+                req.body.image = `${process.cwd()}/${req.file.path}`;
+                break;
+            case 'video':
+                req.body.video = `${process.cwd()}/${req.file.path}`;
+                break;
+            case 'audio':
+                req.body.audio = `${process.cwd()}/${req.file.path}`;
+                break;
+            default:
+                throw new ApiError(500, 'something went wrong');
+            }
+            req.body.image = `${process.cwd()}/${req.file.path}`;
+        }
 
         // check if user created card before
         if (!lastCard) {
