@@ -1,5 +1,6 @@
 // const debug = require('debug')('app:cardController');
 const cardDataMapper = require('../models/card');
+const userDataMapper = require('../models/user');
 const { ApiError } = require('../helpers/errorHandler');
 
 module.exports = {
@@ -75,6 +76,32 @@ module.exports = {
         return res.json(result);
     },
 
+
+    async getAllElement(req, res) {
+        const { userId } = req.params;
+        const user = await userDataMapper.findByPk(Number(userId));
+        const lastCards = await cardDataMapper.findCardsByUserPk(userId);
+        const allCardMood = await cardDataMapper.selectAllCardsMood(userId);
+        // Compares current date with the created date of last card created
+        const lastCardDate = lastCards[0].created_at.toISOString().split('T')[0];
+        const currentDate = new Date().toISOString().split('T')[0];
+
+        if (!lastCardDate === currentDate) {
+            res.json({
+                userId: user.id,
+                userImage: user.image,
+                lastCards: lastCards[0],
+                mood: allCardMood,
+            });
+        }
+        res.json({
+            userId: user.id,
+            userImage: user.image,
+            lastCards,
+            mood: allCardMood,
+        });
+    },
+  
     async update(req, res) {
         const { userId } = req.params;
         const {

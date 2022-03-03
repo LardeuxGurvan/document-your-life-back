@@ -10,15 +10,18 @@ const router = express.Router();
 // Log routes
 router.post('/signup', controllerHandler(userController.signupAction));
 router.post('/login', controllerHandler(userController.login));
-router.post('/logout', controllerHandler(userController.logout));
+router.get('/logout', controllerHandler(userController.logout));
 
 // User routes (auth)
 router.get('/user/:userId(\\d+)/profil', authenticateToken, controllerHandler(userController.profil));
+router.patch('/user/:userId(\\d+)/profil', authenticateToken, controllerHandler(userController.updateProfil));
+
 router.route('/user/:userId(\\d+)/cards/today')
     .post(authenticateToken, controllerHandler(cardController.create))
     .patch(authenticateToken, controllerHandler(cardController.update));
 
 router.get('/user/:userId(\\d+)/cards/:cardId(\\d+)', authenticateToken, controllerHandler(cardController.getCard));
+router.get('/user/:userId(\\d+)/dashboard', authenticateToken, controllerHandler(cardController.getAllElement));
 
 // Refresh token
 router.post('/api/refreshToken', refreshAuthenticateToken);

@@ -18,8 +18,20 @@ Content-Type: application/json
 
 
 ### profil
-GET {{ endpoint }}/user/2/profil
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJib25qb0B0YXRhLmNvbSIsImZpcnN0X25hbWUiOiJ0b3RvIiwibGFzdF9uYW1lIjoidGF0YSIsInBhc3N3b3JkIjoiJDJiJDEwJEhnZXZXVHVjeXFYVW9aMFFwVlBHZU9lWGpGWFpydUU4RjV4aE5IQ2FrdG40UnBtYVd6RTVPIiwiaW1hZ2UiOm51bGwsImNyZWF0ZWRfYXQiOiIyMDIyLTAzLTAyVDE0OjQ5OjI2LjM3MFoiLCJ1cGRhdGVkX2F0IjpudWxsLCJpYXQiOjE2NDYyMzI1NzEsImV4cCI6MTY0NjIzNDM3MX0.wyEosZ4RRUTyHdALb0iOz6fzs2Q5YgYXvOey_wqwsQg
+
+GET {{ endpoint }}/user/1/profil
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0b3RvQHRhdGEuY29tIiwiZmlyc3RfbmFtZSI6InRvdG8iLCJsYXN0X25hbWUiOiJ0YXRhIiwicGFzc3dvcmQiOiIkMmIkMTAkM3dnaC9VL3NsSEIybVNJNEZJcGZxT3BxZjhjcEJCdkUuMTQ3c3JDNzc3bVhidVJTaDBSREMiLCJpbWFnZSI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMjItMDMtMDJUMDk6MTg6MDQuNDEzWiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY0NjIzMDcxMSwiZXhwIjoxNjQ2MjMyNTExfQ.vr6pFZgNS2ePaMXjgxXg-kWTfdeRJLIiEjWo7lIGb0c
+
+### update profil
+PATCH {{ endpoint }}/user/1/profil
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0b3RvQHRhdGEuY29tIiwiZmlyc3RfbmFtZSI6InRvdG8iLCJsYXN0X25hbWUiOiJ0YXRhIiwicGFzc3dvcmQiOiIkMmIkMTAkM3dnaC9VL3NsSEIybVNJNEZJcGZxT3BxZjhjcEJCdkUuMTQ3c3JDNzc3bVhidVJTaDBSREMiLCJpbWFnZSI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMjItMDMtMDJUMDk6MTg6MDQuNDEzWiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY0NjIzMzA0MSwiZXhwIjoxNjQ2MjM0ODQxfQ._uPXVKE4z9R5n_2PPGGEOtrzfvT_SaEiH8MPcSvpxf0
+Content-Type: application/json
+
+{
+    "first_name": "didi",
+    "last_name": "dadada"
+}
+
 
 ### utilisateur
 POST {{ endpoint }}/login
@@ -42,6 +54,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiO
 
 ### create card
 POST {{ endpoint }}/user/1/cards/today
+
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJib25qb0B0YXRhLmNvbSIsImZpcnN0X25hbWUiOiJ0b3RvIiwibGFzdF9uYW1lIjoidGF0YSIsInBhc3N3b3JkIjoiJDJiJDEwJEhnZXZXVHVjeXFYVW9aMFFwVlBHZU9lWGpGWFpydUU4RjV4aE5IQ2FrdG40UnBtYVd6RTVPIiwiaW1hZ2UiOm51bGwsImNyZWF0ZWRfYXQiOiIyMDIyLTAzLTAyVDE0OjQ5OjI2LjM3MFoiLCJ1cGRhdGVkX2F0IjpudWxsLCJpYXQiOjE2NDYyMzI1NzEsImV4cCI6MTY0NjIzNDM3MX0.wyEosZ4RRUTyHdALb0iOz6fzs2Q5YgYXvOey_wqwsQg
 Content-Type: application/json
 
@@ -61,9 +74,13 @@ Content-Type: application/json
 }
 
 ### find card
-GET {{ endpoint }}/user/1/cards/2
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJib25qb3VyQHRhdGEuY29tIiwiZmlyc3RfbmFtZSI6InRvdG8iLCJsYXN0X25hbWUiOiJ0YXRhIiwicGFzc3dvcmQiOiIkMmIkMTAkRnRXdDJUWU04SXRvVVg5THE2QjRSZTc2QkZSZW1Hc0MvbURqRlJZVDNaOXh5cDIwTmwzc2kiLCJpbWFnZSI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMjItMDMtMDJUMTM6NTQ6MTguNjUzWiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY0NjIyOTI2NywiZXhwIjoxNjQ2MjMxMDY3fQ.SpucK1J-oIYkPSBIZ92FUhxcG5y8E-7VEzVv8WCa_Qw
+GET {{ endpoint }}/user/1/cards/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0b3RvQHRhdGEuY29tIiwiZmlyc3RfbmFtZSI6InRvdG8iLCJsYXN0X25hbWUiOiJ0YXRhIiwicGFzc3dvcmQiOiIkMmIkMTAkM3dnaC9VL3NsSEIybVNJNEZJcGZxT3BxZjhjcEJCdkUuMTQ3c3JDNzc3bVhidVJTaDBSREMiLCJpbWFnZSI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMjItMDMtMDJUMDk6MTg6MDQuNDEzWiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY0NjIxNzY5MCwiZXhwIjoxNjQ2MjE5NDkwfQ.Tuz5miXIRBNlpXTS9Su-1Tm86cpKqN0SQCnfPyvRSmE
 
+
+### dashboard
+GET {{ endpoint }}/user/1/dashboard
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0b3RvQHRhdGEuY29tIiwiZmlyc3RfbmFtZSI6InRvdG8iLCJsYXN0X25hbWUiOiJ0YXRhIiwicGFzc3dvcmQiOiIkMmIkMTAkM3dnaC9VL3NsSEIybVNJNEZJcGZxT3BxZjhjcEJCdkUuMTQ3c3JDNzc3bVhidVJTaDBSREMiLCJpbWFnZSI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMjItMDMtMDJUMDk6MTg6MDQuNDEzWiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY0NjIyNjgwNywiZXhwIjoxNjQ2MjI4NjA3fQ.JtRE6kBO7BMcuOtPHXnpYN-BjIhRM7Y9hSQ586pKljk
 ####################################################
 #                       Errors
 ####################################################
@@ -94,3 +111,19 @@ Content-Type: application/json
 
 ### 404
 GET {{ endpoint }}/user/2/profi
+
+
+
+
+
+### signup
+POST https://dyl-api.herokuapp.com/signup
+Content-Type: application/json
+
+{
+    "email": "moi@supermoi.com",
+    "first_name": "toto",
+    "last_name": "tata",
+    "password": "TotoTata!123",
+    "passwordConfirm": "TotoTata!123"
+}
