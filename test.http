@@ -9,7 +9,7 @@ POST {{ endpoint }}/signup
 Content-Type: application/json
 
 {
-    "email": "bonjo@tata.com",
+    "email": "bonjours@tata.com",
     "first_name": "toto",
     "last_name": "tata",
     "password": "TotoTata!123",
@@ -19,14 +19,14 @@ Content-Type: application/json
 
 ### profil
 GET {{ endpoint }}/user/2/profil
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJib25qb0B0YXRhLmNvbSIsImZpcnN0X25hbWUiOiJ0b3RvIiwibGFzdF9uYW1lIjoidGF0YSIsInBhc3N3b3JkIjoiJDJiJDEwJEhnZXZXVHVjeXFYVW9aMFFwVlBHZU9lWGpGWFpydUU4RjV4aE5IQ2FrdG40UnBtYVd6RTVPIiwiaW1hZ2UiOm51bGwsImNyZWF0ZWRfYXQiOiIyMDIyLTAzLTAyVDE0OjQ5OjI2LjM3MFoiLCJ1cGRhdGVkX2F0IjpudWxsLCJpYXQiOjE2NDYyMzI1NzEsImV4cCI6MTY0NjIzNDM3MX0.wyEosZ4RRUTyHdALb0iOz6fzs2Q5YgYXvOey_wqwsQg
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJib25qb3Vyc0B0YXRhLmNvbSIsImZpcnN0X25hbWUiOiJ0b3RvIiwibGFzdF9uYW1lIjoidGF0YSIsInBhc3N3b3JkIjoiJDJiJDEwJHdsZkNzdGRvTndXR3UuTjBnRExRVHVmdUhJcHBQRS94UHVhVHRCUFczZ0hQb0Y4NE1BQXlpIiwiaW1hZ2UiOm51bGwsImNyZWF0ZWRfYXQiOiIyMDIyLTAzLTAzVDEwOjAyOjE3LjU2MFoiLCJ1cGRhdGVkX2F0IjpudWxsLCJpYXQiOjE2NDYzMDE3NDMsImV4cCI6MTY0NjMwMzU0M30.uMDjq2YcWiRIFrBEPskay7RDmcW7xto16J_N4naWDCk
 
 ### utilisateur
 POST {{ endpoint }}/login
 Content-Type: application/json
 
 {
-    "email": "bonjo@tata.com",
+    "email": "bonjours@tata.com",
     "password": "TotoTata!123"
 }
 
@@ -38,26 +38,25 @@ POST {{ endpoint }}/logout
 
 ### utilisateur
 POST {{ endpoint }}/api/refreshtoken
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJib25qb0B0YXRhLmNvbSIsImZpcnN0X25hbWUiOiJ0b3RvIiwibGFzdF9uYW1lIjoidGF0YSIsInBhc3N3b3JkIjoiJDJiJDEwJEhnZXZXVHVjeXFYVW9aMFFwVlBHZU9lWGpGWFpydUU4RjV4aE5IQ2FrdG40UnBtYVd6RTVPIiwiaW1hZ2UiOm51bGwsImNyZWF0ZWRfYXQiOiIyMDIyLTAzLTAyVDE0OjQ5OjI2LjM3MFoiLCJ1cGRhdGVkX2F0IjpudWxsLCJpYXQiOjE2NDYyMzI1NzEsImV4cCI6MTY0NjIzNDM3MX0.wyEosZ4RRUTyHdALb0iOz6fzs2Q5YgYXvOey_wqwsQg
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJib25qb3Vyc0B0YXRhLmNvbSIsImZpcnN0X25hbWUiOiJ0b3RvIiwibGFzdF9uYW1lIjoidGF0YSIsInBhc3N3b3JkIjoiJDJiJDEwJHdsZkNzdGRvTndXR3UuTjBnRExRVHVmdUhJcHBQRS94UHVhVHRCUFczZ0hQb0Y4NE1BQXlpIiwiaW1hZ2UiOm51bGwsImNyZWF0ZWRfYXQiOiIyMDIyLTAzLTAzVDEwOjAyOjE3LjU2MFoiLCJ1cGRhdGVkX2F0IjpudWxsLCJpYXQiOjE2NDYzMDE3NDMsImV4cCI6MTY0NjMwMzU0M30.uMDjq2YcWiRIFrBEPskay7RDmcW7xto16J_N4naWDCk
 
 ### create card
-POST {{ endpoint }}/user/1/cards/today
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJib25qb0B0YXRhLmNvbSIsImZpcnN0X25hbWUiOiJ0b3RvIiwibGFzdF9uYW1lIjoidGF0YSIsInBhc3N3b3JkIjoiJDJiJDEwJEhnZXZXVHVjeXFYVW9aMFFwVlBHZU9lWGpGWFpydUU4RjV4aE5IQ2FrdG40UnBtYVd6RTVPIiwiaW1hZ2UiOm51bGwsImNyZWF0ZWRfYXQiOiIyMDIyLTAzLTAyVDE0OjQ5OjI2LjM3MFoiLCJ1cGRhdGVkX2F0IjpudWxsLCJpYXQiOjE2NDYyMzI1NzEsImV4cCI6MTY0NjIzNDM3MX0.wyEosZ4RRUTyHdALb0iOz6fzs2Q5YgYXvOey_wqwsQg
+POST {{ endpoint }}/user/3/cards/today
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJib25qb3Vyc0B0YXRhLmNvbSIsImZpcnN0X25hbWUiOiJ0b3RvIiwibGFzdF9uYW1lIjoidGF0YSIsInBhc3N3b3JkIjoiJDJiJDEwJHdsZkNzdGRvTndXR3UuTjBnRExRVHVmdUhJcHBQRS94UHVhVHRCUFczZ0hQb0Y4NE1BQXlpIiwiaW1hZ2UiOm51bGwsImNyZWF0ZWRfYXQiOiIyMDIyLTAzLTAzVDEwOjAyOjE3LjU2MFoiLCJ1cGRhdGVkX2F0IjpudWxsLCJpYXQiOjE2NDYzMDE3NDMsImV4cCI6MTY0NjMwMzU0M30.uMDjq2YcWiRIFrBEPskay7RDmcW7xto16J_N4naWDCk
 Content-Type: application/json
 
 {
-    "text": "carte teste 3"
+    "text": "carte teste 3",
+    "moodLabel": "happy"
 }
 
 ### update card
-PATCH {{ endpoint }}/user/1/cards/today
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJib25qb0B0YXRhLmNvbSIsImZpcnN0X25hbWUiOiJ0b3RvIiwibGFzdF9uYW1lIjoidGF0YSIsInBhc3N3b3JkIjoiJDJiJDEwJEhnZXZXVHVjeXFYVW9aMFFwVlBHZU9lWGpGWFpydUU4RjV4aE5IQ2FrdG40UnBtYVd6RTVPIiwiaW1hZ2UiOm51bGwsImNyZWF0ZWRfYXQiOiIyMDIyLTAzLTAyVDE0OjQ5OjI2LjM3MFoiLCJ1cGRhdGVkX2F0IjpudWxsLCJpYXQiOjE2NDYyMzI1NzEsImV4cCI6MTY0NjIzNDM3MX0.wyEosZ4RRUTyHdALb0iOz6fzs2Q5YgYXvOey_wqwsQg
+PATCH {{ endpoint }}/user/3/cards/today
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJib25qb3Vyc0B0YXRhLmNvbSIsImZpcnN0X25hbWUiOiJ0b3RvIiwibGFzdF9uYW1lIjoidGF0YSIsInBhc3N3b3JkIjoiJDJiJDEwJHdsZkNzdGRvTndXR3UuTjBnRExRVHVmdUhJcHBQRS94UHVhVHRCUFczZ0hQb0Y4NE1BQXlpIiwiaW1hZ2UiOm51bGwsImNyZWF0ZWRfYXQiOiIyMDIyLTAzLTAzVDEwOjAyOjE3LjU2MFoiLCJ1cGRhdGVkX2F0IjpudWxsLCJpYXQiOjE2NDYzMDE3NDMsImV4cCI6MTY0NjMwMzU0M30.uMDjq2YcWiRIFrBEPskay7RDmcW7xto16J_N4naWDCk
 Content-Type: application/json
 
 {
-    "text": "Première",
-    "video": "essai patch",
-    "mood_id": 3
+    "text": "Bonjour"
 }
 
 ### find card
