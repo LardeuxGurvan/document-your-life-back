@@ -101,9 +101,8 @@ module.exports = {
         const result = await client.query('SELECT * FROM "card" WHERE "user_id" = $1 ORDER BY "created_at" DESC LIMIT 1', [id]);
         const idTodayCard = result.rows[0].id;
 
-        const deletedElementCard = await client.query(
-            `UPDATE "card" SET ${element.element} = NULL WHERE id = $1 RETURNING *`, [idTodayCard]);
-        console.log('carte modifier : ', deletedElementCard.rows[0]);
+        const deletedElementCard = await client.query(`UPDATE "card" SET ${element.element} = NULL WHERE id = $1 RETURNING *`, [idTodayCard]);
+        return deletedElementCard.rows[0];
     },
 
     async delete(id, card) {

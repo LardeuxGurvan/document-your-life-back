@@ -148,7 +148,8 @@ module.exports = {
         const lastCardDate = lastCard.created_at.toISOString().split('T')[0];
         const currentDate = new Date().toISOString().split('T')[0];
         if (lastCardDate === currentDate) {
-            await cardDataMapper.deleteOne(userId, req.body, currentDate);
+            const elementDeleted = await cardDataMapper.deleteOne(userId, req.body, currentDate);
+            return res.json(elementDeleted);
         }
     },
 

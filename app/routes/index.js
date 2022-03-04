@@ -19,6 +19,7 @@ router.delete('/user/:userId(\\d+)/profil', authenticateToken, controllerHandler
 
 router.route('/user/:userId(\\d+)/cards/today')
     .post(authenticateToken, controllerHandler(cardController.create))
+    .patch(authenticateToken, controllerHandler(cardController.update))
     .delete(authenticateToken, controllerHandler(cardController.deleteOneElement));
 
 router.get('/user/:userId(\\d+)/cards/:cardId(\\d+)', authenticateToken, controllerHandler(cardController.getCard));
