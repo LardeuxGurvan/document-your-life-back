@@ -55,9 +55,6 @@ module.exports = {
         if (!password) {
             password = newUser.password;
         }
-        console.log(password);
-        console.log('mail ancien : ', oldUser.email);
-        console.log('mail nouveau : ', newUser.email);
         const updatedUser = await client.query(
             'UPDATE "user" SET email = $1, first_name = $2, last_name = $3, password = $4 WHERE id = $5 RETURNING *',
             [
@@ -70,6 +67,16 @@ module.exports = {
         );
         console.log('dans le model : ', updatedUser.rows[0]);
         return newUser.rows[0];
+    },
+
+    async deleteByPk(id) {
+        const user = await client.query('SELECT * FROM "user" WHERE id = $1', [id]);
+        if (user.rowCount === 0) {
+            throw new ApiError(400, 'This user does not exists');
+        }
+        const result = await client.query('DELETE FROM "user" WHERE id = $1 RESTART IDENTITY', [id]);
+
+        return !!result.rowCount;
     },
 
 };

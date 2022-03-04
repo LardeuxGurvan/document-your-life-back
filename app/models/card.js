@@ -93,4 +93,31 @@ module.exports = {
 
         return savedCard.rows[0];
     },
+
+    async deleteOne(id, element, todayDate) {
+        console.log('todayDate', todayDate);
+        console.log('element', element);
+        console.log('id', id);
+        const result = await client.query('SELECT * FROM "card" WHERE "user_id" = $1 ORDER BY "created_at" DESC LIMIT 1', [id]);
+        const idTodayCard = result.rows[0].id;
+
+        const deletedElementCard = await client.query(
+            `UPDATE "card" SET ${element.element} = NULL WHERE id = $1 RETURNING *`, [idTodayCard]);
+        console.log('carte modifier : ', deletedElementCard.rows[0]);
+    },
+
+    async delete(id, card) {
+        console.log('user id : ', id, 'card id : ', card);
+        const user = await client.query('SELECT * FROM "user" WHERE id = $1', [id]);
+        if (user.rowCount === 0) {
+            throw new ApiError(400, 'This user does not exists');
+        }
+        const findCard = await client.query('SELECT * FROM "card" WHERE id = $1', [card]);
+        if (findCard.rowCount === 0) {
+            throw new ApiError(400, 'This card does not exists');
+        }
+        const result = await client.query('DELETE FROM "card" WHERE id = $1', [card]);
+
+        return !!result.rowCount;
+    },
 };

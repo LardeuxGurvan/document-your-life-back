@@ -76,7 +76,6 @@ module.exports = {
         return res.json(result);
     },
 
-
     async getAllElement(req, res) {
         const { userId } = req.params;
         const user = await userDataMapper.findByPk(Number(userId));
@@ -101,7 +100,7 @@ module.exports = {
             mood: allCardMood,
         });
     },
-  
+
     async update(req, res) {
         const { userId } = req.params;
         const {
@@ -136,6 +135,21 @@ module.exports = {
         // update card
         const savedResult = await cardDataMapper.update(lastCard.id, req.body);
         return res.json(savedResult);
+    },
+
+    async delete(req, res) {
+        await cardDataMapper.delete(req.params.userId, req.params.cardId);
+        console.log('card deleted');
+        return res.status(204).json('Card deleted!');
+    },
+    async deleteOneElement(req, res) {
+        const { userId } = req.params;
+        const lastCard = await cardDataMapper.findLatestByUserPk(userId);
+        const lastCardDate = lastCard.created_at.toISOString().split('T')[0];
+        const currentDate = new Date().toISOString().split('T')[0];
+        if (lastCardDate === currentDate) {
+            await cardDataMapper.deleteOne(userId, req.body, currentDate);
+        }
     },
 
 };

@@ -94,6 +94,17 @@ const userController = {
         res.json('logout');
     },
 
+    async deleteProfil(req, res) {
+        const { userId } = req.params;
+        const user = await userDataMapper.findByPk(Number(userId));
+        // User does not exists
+        if (!user) {
+            throw new ApiError(404, 'User not found');
+        }
+        await userDataMapper.deleteByPk(userId);
+        return res.status(204).json('Delete complet!');
+    },
+
 };
 
 module.exports = userController;
