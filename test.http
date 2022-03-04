@@ -12,16 +12,19 @@ Content-Type: application/json
     "email": "toto@tatf.com",
     "first_name": "toto",
     "last_name": "tata",
-    "password": "TotoTata!1",
+    "password": "TotoTata!123",
     "passwordConfirm": "TotoTata!123"
 }
 
 
 ### profil
-GET {{ endpoint }}/user/4/profil
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJ0b3RvQHRhdGYuY29tIiwiZmlyc3RfbmFtZSI6InRvdG8iLCJsYXN0X25hbWUiOiJ0YXRhIiwicGFzc3dvcmQiOiIkMmIkMTAka3g1LzZKOFNXVG5hWkNJd0JKNDhZT0lWNXpvZ2RKMHlRTHViZTRWaTZSTWNCdmJrd0d5THUiLCJpbWFnZSI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMjItMDMtMDNUMTA6MjQ6MjguOTk5WiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY0NjMwMzE1MCwiZXhwIjoxNjQ2MzA0OTUwfQ.O6AdJZQQ1AgxWmXiHI0_N7OH5Wm6lHAh0QOEmYtc6CE
+GET {{ endpoint }}/user/1/profil
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0b3RvQHRhdGYuY29tIiwiZmlyc3RfbmFtZSI6InRvdG8iLCJsYXN0X25hbWUiOiJ0YXRhIiwicGFzc3dvcmQiOiIkMmIkMTAkUzFlOFg0ZHhFSy9YVUl4dGZWL0ppLkZZNC9WellMaW1UQmxtYUdZWDZ3VElVaVFVUERvSjYiLCJpbWFnZSI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMjItMDMtMDNUMTM6MDM6NTkuMzYxWiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY0NjMxMjY3NCwiZXhwIjoxNjQ2MzE0NDc0fQ.pHdrMOBR50VDIjd625Oegyplp7f-6m5S_8QFpQ1yQxE
 
 
+### profil deleted
+DELETE  {{ endpoint }}/user/2/profil
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0b3RvQHRhdGYuY29tIiwiZmlyc3RfbmFtZSI6InRvdG8iLCJsYXN0X25hbWUiOiJ0YXRhIiwicGFzc3dvcmQiOiIkMmIkMTAkUzFlOFg0ZHhFSy9YVUl4dGZWL0ppLkZZNC9WellMaW1UQmxtYUdZWDZ3VElVaVFVUERvSjYiLCJpbWFnZSI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMjItMDMtMDNUMTM6MDM6NTkuMzYxWiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY0NjMxMjY3NCwiZXhwIjoxNjQ2MzE0NDc0fQ.pHdrMOBR50VDIjd625Oegyplp7f-6m5S_8QFpQ1yQxE
 
 ### update profil
 PATCH {{ endpoint }}/user/4/profil
@@ -42,7 +45,7 @@ POST {{ endpoint }}/login
 Content-Type: application/json
 
 {
-    "email": "bonjours@tata.com",
+    "email": "toto@tatf.com",
     "password": "TotoTata!123"
 }
 
@@ -58,33 +61,51 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiO
 
 ### create card
 
-POST {{ endpoint }}/user/1/cards/today
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJib25qb0B0YXRhLmNvbSIsImZpcnN0X25hbWUiOiJ0b3RvIiwibGFzdF9uYW1lIjoidGF0YSIsInBhc3N3b3JkIjoiJDJiJDEwJEhnZXZXVHVjeXFYVW9aMFFwVlBHZU9lWGpGWFpydUU4RjV4aE5IQ2FrdG40UnBtYVd6RTVPIiwiaW1hZ2UiOm51bGwsImNyZWF0ZWRfYXQiOiIyMDIyLTAzLTAyVDE0OjQ5OjI2LjM3MFoiLCJ1cGRhdGVkX2F0IjpudWxsLCJpYXQiOjE2NDYyMzI1NzEsImV4cCI6MTY0NjIzNDM3MX0.wyEosZ4RRUTyHdALb0iOz6fzs2Q5YgYXvOey_wqwsQg
-
+POST {{ endpoint }}/user/2/cards/today
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ0b3RvQHRhdGYuY29tIiwiZmlyc3RfbmFtZSI6InRvdG8iLCJsYXN0X25hbWUiOiJ0YXRhIiwicGFzc3dvcmQiOiIkMmIkMTAkSEZzcDhjV3YuaUE0WGNzU1Nuc1loZXpQWTZmVGZsNU54QTl5VGVTZ1FpYUMweVRBbWUwZzYiLCJpbWFnZSI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMjItMDMtMDNUMTM6MDc6MDMuMTk3WiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY0NjM4ODU3MSwiZXhwIjoxNjQ2MzkwMzcxfQ.SgQ7rh3A3cYVA24nqH75x-FzNLtIa9Bjf0cpoy84Xbo
 Content-Type: application/json
 
 {
-    "text": "carte teste 3",
-    "moodLabel": "happy"
+    "text": "carte oiarsentoarseitn 3"
 }
 
 ### update card
-PATCH {{ endpoint }}/user/3/cards/today
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJib25qb3Vyc0B0YXRhLmNvbSIsImZpcnN0X25hbWUiOiJ0b3RvIiwibGFzdF9uYW1lIjoidGF0YSIsInBhc3N3b3JkIjoiJDJiJDEwJHdsZkNzdGRvTndXR3UuTjBnRExRVHVmdUhJcHBQRS94UHVhVHRCUFczZ0hQb0Y4NE1BQXlpIiwiaW1hZ2UiOm51bGwsImNyZWF0ZWRfYXQiOiIyMDIyLTAzLTAzVDEwOjAyOjE3LjU2MFoiLCJ1cGRhdGVkX2F0IjpudWxsLCJpYXQiOjE2NDYzMDE3NDMsImV4cCI6MTY0NjMwMzU0M30.uMDjq2YcWiRIFrBEPskay7RDmcW7xto16J_N4naWDCk
+PATCH {{ endpoint }}/user/2/cards/today
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ0b3RvQHRhdGYuY29tIiwiZmlyc3RfbmFtZSI6InRvdG8iLCJsYXN0X25hbWUiOiJ0YXRhIiwicGFzc3dvcmQiOiIkMmIkMTAkSEZzcDhjV3YuaUE0WGNzU1Nuc1loZXpQWTZmVGZsNU54QTl5VGVTZ1FpYUMweVRBbWUwZzYiLCJpbWFnZSI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMjItMDMtMDNUMTM6MDc6MDMuMTk3WiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY0NjM4ODU3MSwiZXhwIjoxNjQ2MzkwMzcxfQ.SgQ7rh3A3cYVA24nqH75x-FzNLtIa9Bjf0cpoy84Xbo
 Content-Type: application/json
 
 {
-    "text": "Bonjour"
+    "text": "Bonjour aorseitnaroisten"
 }
 
-### find card
-GET {{ endpoint }}/user/1/cards/1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0b3RvQHRhdGEuY29tIiwiZmlyc3RfbmFtZSI6InRvdG8iLCJsYXN0X25hbWUiOiJ0YXRhIiwicGFzc3dvcmQiOiIkMmIkMTAkM3dnaC9VL3NsSEIybVNJNEZJcGZxT3BxZjhjcEJCdkUuMTQ3c3JDNzc3bVhidVJTaDBSREMiLCJpbWFnZSI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMjItMDMtMDJUMDk6MTg6MDQuNDEzWiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY0NjIxNzY5MCwiZXhwIjoxNjQ2MjE5NDkwfQ.Tuz5miXIRBNlpXTS9Su-1Tm86cpKqN0SQCnfPyvRSmE
+### delete today card
+DELETE {{ endpoint }}/user/2/cards/today
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ0b3RvQHRhdGYuY29tIiwiZmlyc3RfbmFtZSI6InRvdG8iLCJsYXN0X25hbWUiOiJ0YXRhIiwicGFzc3dvcmQiOiIkMmIkMTAkSEZzcDhjV3YuaUE0WGNzU1Nuc1loZXpQWTZmVGZsNU54QTl5VGVTZ1FpYUMweVRBbWUwZzYiLCJpbWFnZSI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMjItMDMtMDNUMTM6MDc6MDMuMTk3WiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY0NjM4ODU3MSwiZXhwIjoxNjQ2MzkwMzcxfQ.SgQ7rh3A3cYVA24nqH75x-FzNLtIa9Bjf0cpoy84Xbo
+Content-Type: application/json
 
+{
+    "element": "text"
+}
+
+
+### find card
+GET {{ endpoint }}/user/2/cards/3
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ0b3RvQHRhdGYuY29tIiwiZmlyc3RfbmFtZSI6InRvdG8iLCJsYXN0X25hbWUiOiJ0YXRhIiwicGFzc3dvcmQiOiIkMmIkMTAkSEZzcDhjV3YuaUE0WGNzU1Nuc1loZXpQWTZmVGZsNU54QTl5VGVTZ1FpYUMweVRBbWUwZzYiLCJpbWFnZSI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMjItMDMtMDNUMTM6MDc6MDMuMTk3WiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY0NjMxNTU1MywiZXhwIjoxNjQ2MzE3MzUzfQ.4rs_kgm8Ae41nmH9jjnNOg6ruVMOvIyfuzHE-R3bCuo
+
+
+
+### delete card
+DELETE {{ endpoint }}/user/2/cards/5
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ0b3RvQHRhdGYuY29tIiwiZmlyc3RfbmFtZSI6InRvdG8iLCJsYXN0X25hbWUiOiJ0YXRhIiwicGFzc3dvcmQiOiIkMmIkMTAkSEZzcDhjV3YuaUE0WGNzU1Nuc1loZXpQWTZmVGZsNU54QTl5VGVTZ1FpYUMweVRBbWUwZzYiLCJpbWFnZSI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMjItMDMtMDNUMTM6MDc6MDMuMTk3WiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY0NjM4MzY4MywiZXhwIjoxNjQ2Mzg1NDgzfQ.yLo9bKQdGNWpG57Lph6gJ5p7hf0trrj3dCI-YwF7DGo
 
 ### dashboard
-GET {{ endpoint }}/user/1/dashboard
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0b3RvQHRhdGEuY29tIiwiZmlyc3RfbmFtZSI6InRvdG8iLCJsYXN0X25hbWUiOiJ0YXRhIiwicGFzc3dvcmQiOiIkMmIkMTAkM3dnaC9VL3NsSEIybVNJNEZJcGZxT3BxZjhjcEJCdkUuMTQ3c3JDNzc3bVhidVJTaDBSREMiLCJpbWFnZSI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMjItMDMtMDJUMDk6MTg6MDQuNDEzWiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY0NjI5NDgwOCwiZXhwIjoxNjQ2Mjk2NjA4fQ.hS9FDr1y3VdGAaOSCb7rHsWC_QrL801ETMYKjYvb56o
+GET {{ endpoint }}/user/2/dashboard
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ0b3RvQHRhdGYuY29tIiwiZmlyc3RfbmFtZSI6InRvdG8iLCJsYXN0X25hbWUiOiJ0YXRhIiwicGFzc3dvcmQiOiIkMmIkMTAkSEZzcDhjV3YuaUE0WGNzU1Nuc1loZXpQWTZmVGZsNU54QTl5VGVTZ1FpYUMweVRBbWUwZzYiLCJpbWFnZSI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMjItMDMtMDNUMTM6MDc6MDMuMTk3WiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY0NjM4ODU3MSwiZXhwIjoxNjQ2MzkwMzcxfQ.SgQ7rh3A3cYVA24nqH75x-FzNLtIa9Bjf0cpoy84Xbo
+
+
+
+
+
 ####################################################
 #                       Errors
 ####################################################

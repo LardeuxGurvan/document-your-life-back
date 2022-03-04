@@ -15,12 +15,15 @@ router.get('/logout', controllerHandler(userController.logout));
 // User routes (auth)
 router.get('/user/:userId(\\d+)/profil', authenticateToken, controllerHandler(userController.profil));
 router.patch('/user/:userId(\\d+)/profil', authenticateToken, controllerHandler(userController.updateProfil));
+router.delete('/user/:userId(\\d+)/profil', authenticateToken, controllerHandler(userController.deleteProfil));
 
 router.route('/user/:userId(\\d+)/cards/today')
     .post(authenticateToken, controllerHandler(cardController.create))
-    .patch(authenticateToken, controllerHandler(cardController.update));
+    .patch(authenticateToken, controllerHandler(cardController.update))
+    .delete(authenticateToken, controllerHandler(cardController.deleteOneElement));
 
 router.get('/user/:userId(\\d+)/cards/:cardId(\\d+)', authenticateToken, controllerHandler(cardController.getCard));
+router.delete('/user/:userId(\\d+)/cards/:cardId(\\d+)', authenticateToken, controllerHandler(cardController.delete));
 router.get('/user/:userId(\\d+)/dashboard', authenticateToken, controllerHandler(cardController.getAllElement));
 
 // Refresh token
