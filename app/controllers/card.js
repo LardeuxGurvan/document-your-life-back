@@ -195,6 +195,21 @@ module.exports = {
         // find the last created card by user
         const lastCard = await cardDataMapper.findLatestByUserPk(userId);
 
+        const lastCardDate = lastCard.created_at.toISOString().split('T')[0];
+        const currentDate = new Date().toISOString().split('T')[0];
+
+        if (!lastCard || lastCardDate !== currentDate) {
+            // create card
+            const result = await cardDataMapper.create(
+                text,
+                req.body.video,
+                req.body.audio,
+                req.body.image,
+                moodLabel,
+                Number(userId),
+            );
+            return res.json(result);
+        }
         // Check if there is a file
         if (req.files.image || req.files.video || req.files.audio) {
             // add path to the body data
@@ -220,9 +235,6 @@ module.exports = {
                 throw new ApiError(500, 'something went wrong');
             }
         }
-
-        const lastCardDate = lastCard.created_at.toISOString().split('T')[0];
-        const currentDate = new Date().toISOString().split('T')[0];
 
         // Case there is no card created before or last card's date is not matching
         if (!lastCard || lastCardDate !== currentDate) {
