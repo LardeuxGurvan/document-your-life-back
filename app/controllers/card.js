@@ -242,4 +242,20 @@ module.exports = {
         return res.json(savedResult);
     },
 
+    async delete(req, res) {
+        await cardDataMapper.delete(req.params.userId, req.params.cardId);
+        console.log('card deleted');
+        return res.status(204).json('Card deleted!');
+    },
+    async deleteOneElement(req, res) {
+        const { userId } = req.params;
+        const lastCard = await cardDataMapper.findLatestByUserPk(userId);
+        const lastCardDate = lastCard.created_at.toISOString().split('T')[0];
+        const currentDate = new Date().toISOString().split('T')[0];
+        if (lastCardDate === currentDate) {
+            const elementDeleted = await cardDataMapper.deleteOne(userId, req.body, currentDate);
+            return res.json(elementDeleted);
+        }
+    },
+
 };
