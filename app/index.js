@@ -4,10 +4,12 @@ const cors = require('cors');
 // const session = require('express-session');
 // const cookieParser = require('cookie-parser');
 const router = require('./routes');
+
 const app = express();
 // app.use(cookieParser());
 // app.use(bodyParser.json());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use(cors(process.env.CORS_DOMAINS ?? '*'));
 
@@ -29,7 +31,6 @@ app.use(cors(process.env.CORS_DOMAINS ?? '*'));
 
 //     next();
 // });
-
 
 app.use(router);
 

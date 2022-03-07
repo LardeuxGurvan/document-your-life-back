@@ -4,7 +4,7 @@ const { userController, cardController } = require('../controllers');
 const { ApiError } = require('../helpers/errorHandler');
 const { errorHandler } = require('../helpers/errorHandler');
 const { authenticateToken, refreshAuthenticateToken } = require('../middleware/middlewareToken');
-const { imageUpload, videoUpload } = require('../middleware/multerMiddleware');
+const { upload, fieldsArray } = require('../middleware/multerMiddleware');
 
 const router = express.Router();
 
@@ -19,8 +19,10 @@ router.patch('/user/:userId(\\d+)/profil', authenticateToken, controllerHandler(
 
 // Cards routes (auth)
 router.route('/user/:userId(\\d+)/cards/today')
-    .post(imageUpload.single('image'), authenticateToken, imageUpload.single('video'), controllerHandler(cardController.create))
-    .patch(imageUpload.single('image'), authenticateToken, imageUpload.single('video'), controllerHandler(cardController.update));
+    .put(
+        controllerHandler(upload.fields(fieldsArray)),
+        controllerHandler(cardController.createOrUpdate),
+    );
 
 router.get('/user/:userId(\\d+)/cards/:cardId(\\d+)', controllerHandler(cardController.getCard));
 router.get('/user/:userId(\\d+)/dashboard', authenticateToken, controllerHandler(cardController.getAllElement));
