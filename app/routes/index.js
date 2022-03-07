@@ -19,12 +19,15 @@ router.patch('/user/:userId(\\d+)/profil', authenticateToken, controllerHandler(
 router.delete('/user/:userId(\\d+)/profil', authenticateToken, controllerHandler(userController.deleteProfil));
 
 // Cards routes (auth)
-router.route('/user/:userId(\\d+)/cards/today')
+router.route('/user/:userId(\\d+)/cards/today');
 
 router.route('/user/:userId(\\d+)/cards/:cardId(\\d+)')
     .get(authenticateToken, controllerHandler(cardController.getCard))
-    .put(authenticateToken, controllerHandler(upload.fields(fieldsArray)),
-        controllerHandler(cardController.createOrUpdate))
+    .put(
+        authenticateToken,
+        controllerHandler(upload.fields(fieldsArray)),
+        controllerHandler(cardController.createOrUpdate),
+    )
     .delete(authenticateToken, controllerHandler(cardController.deleteOneElement));
 
 router.get('/user/:userId(\\d+)/cards/:cardId(\\d+)', authenticateToken, controllerHandler(cardController.getCard));
