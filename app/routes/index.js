@@ -16,13 +16,9 @@ router.get('/logout', controllerHandler(userController.logout));
 // User routes (auth)
 router.get('/user/:userId(\\d+)/profil', authenticateToken, controllerHandler(userController.profil));
 router.patch('/user/:userId(\\d+)/profil', authenticateToken, controllerHandler(userController.updateProfil));
-router.delete('/user/:userId(\\d+)/profil', authenticateToken, controllerHandler(userController.deleteProfil));
 
 // Cards routes (auth)
-router.route('/user/:userId(\\d+)/cards/today');
-
-router.route('/user/:userId(\\d+)/cards/:cardId(\\d+)')
-    .get(authenticateToken, controllerHandler(cardController.getCard))
+router.route('/user/:userId(\\d+)/cards/today')
     .put(
         authenticateToken,
         controllerHandler(upload.fields(fieldsArray)),
@@ -30,9 +26,7 @@ router.route('/user/:userId(\\d+)/cards/:cardId(\\d+)')
     )
     .delete(authenticateToken, controllerHandler(cardController.deleteOneElement));
 
-router.get('/user/:userId(\\d+)/cards/:cardId(\\d+)', authenticateToken, controllerHandler(cardController.getCard));
-router.delete('/user/:userId(\\d+)/cards/:cardId(\\d+)', authenticateToken, controllerHandler(cardController.delete));
-
+router.get('/user/:userId(\\d+)/cards/:cardId(\\d+)', controllerHandler(cardController.getCard));
 router.get('/user/:userId(\\d+)/dashboard', authenticateToken, controllerHandler(cardController.getAllElement));
 
 // Refresh token
