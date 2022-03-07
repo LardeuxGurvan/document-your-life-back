@@ -9,7 +9,7 @@ POST {{ endpoint }}/signup
 Content-Type: application/json
 
 {
-    "email": "toto@tatf.com",
+    "email": "toto@tatd.com",
     "first_name": "toto",
     "last_name": "tata",
     "password": "TotoTata!123",
@@ -20,6 +20,7 @@ Content-Type: application/json
 ### profil
 GET {{ endpoint }}/user/1/profil
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0b3RvQHRhdGYuY29tIiwiZmlyc3RfbmFtZSI6InRvdG8iLCJsYXN0X25hbWUiOiJ0YXRhIiwicGFzc3dvcmQiOiIkMmIkMTAkUzFlOFg0ZHhFSy9YVUl4dGZWL0ppLkZZNC9WellMaW1UQmxtYUdZWDZ3VElVaVFVUERvSjYiLCJpbWFnZSI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMjItMDMtMDNUMTM6MDM6NTkuMzYxWiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY0NjMxMjY3NCwiZXhwIjoxNjQ2MzE0NDc0fQ.pHdrMOBR50VDIjd625Oegyplp7f-6m5S_8QFpQ1yQxE
+
 
 
 ### profil deleted
@@ -45,6 +46,7 @@ POST {{ endpoint }}/login
 Content-Type: application/json
 
 {
+
     "email": "toto@tatf.com",
     "password": "TotoTata!123"
 }
@@ -60,7 +62,6 @@ POST {{ endpoint }}/api/refreshtoken
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJib25qb3Vyc0B0YXRhLmNvbSIsImZpcnN0X25hbWUiOiJ0b3RvIiwibGFzdF9uYW1lIjoidGF0YSIsInBhc3N3b3JkIjoiJDJiJDEwJHdsZkNzdGRvTndXR3UuTjBnRExRVHVmdUhJcHBQRS94UHVhVHRCUFczZ0hQb0Y4NE1BQXlpIiwiaW1hZ2UiOm51bGwsImNyZWF0ZWRfYXQiOiIyMDIyLTAzLTAzVDEwOjAyOjE3LjU2MFoiLCJ1cGRhdGVkX2F0IjpudWxsLCJpYXQiOjE2NDYzMDE3NDMsImV4cCI6MTY0NjMwMzU0M30.uMDjq2YcWiRIFrBEPskay7RDmcW7xto16J_N4naWDCk
 
 ### create card
-
 POST {{ endpoint }}/user/2/cards/today
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ0b3RvQHRhdGYuY29tIiwiZmlyc3RfbmFtZSI6InRvdG8iLCJsYXN0X25hbWUiOiJ0YXRhIiwicGFzc3dvcmQiOiIkMmIkMTAkSEZzcDhjV3YuaUE0WGNzU1Nuc1loZXpQWTZmVGZsNU54QTl5VGVTZ1FpYUMweVRBbWUwZzYiLCJpbWFnZSI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMjItMDMtMDNUMTM6MDc6MDMuMTk3WiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY0NjM4ODU3MSwiZXhwIjoxNjQ2MzkwMzcxfQ.SgQ7rh3A3cYVA24nqH75x-FzNLtIa9Bjf0cpoy84Xbo
 Content-Type: application/json

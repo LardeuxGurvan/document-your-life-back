@@ -29,7 +29,11 @@ const userController = {
             const salt = await bcrypt.genSalt(10);
             const encryptedPassword = await bcrypt.hash(req.body.password, salt);
             console.log('dans le cryptage du mp');
-            const savedProfil = await userDataMapper.update(req.params.userId, req.body, encryptedPassword);
+            const savedProfil = await userDataMapper.update(
+                req.params.userId,
+                req.body,
+                encryptedPassword,
+            );
             return res.json(savedProfil);
         }
 

@@ -4,6 +4,7 @@ const { userController, cardController } = require('../controllers');
 const { ApiError } = require('../helpers/errorHandler');
 const { errorHandler } = require('../helpers/errorHandler');
 const { authenticateToken, refreshAuthenticateToken } = require('../middleware/middlewareToken');
+const { upload, fieldsArray } = require('../middleware/multerMiddleware');
 
 const router = express.Router();
 
@@ -17,13 +18,18 @@ router.get('/user/:userId(\\d+)/profil', authenticateToken, controllerHandler(us
 router.patch('/user/:userId(\\d+)/profil', authenticateToken, controllerHandler(userController.updateProfil));
 router.delete('/user/:userId(\\d+)/profil', authenticateToken, controllerHandler(userController.deleteProfil));
 
+// Cards routes (auth)
 router.route('/user/:userId(\\d+)/cards/today')
-    .post(authenticateToken, controllerHandler(cardController.create))
-    .patch(authenticateToken, controllerHandler(cardController.update))
+
+router.route('/user/:userId(\\d+)/cards/:cardId(\\d+)')
+    .get(authenticateToken, controllerHandler(cardController.getCard))
+    .put(authenticateToken, controllerHandler(upload.fields(fieldsArray)),
+        controllerHandler(cardController.createOrUpdate))
     .delete(authenticateToken, controllerHandler(cardController.deleteOneElement));
 
 router.get('/user/:userId(\\d+)/cards/:cardId(\\d+)', authenticateToken, controllerHandler(cardController.getCard));
 router.delete('/user/:userId(\\d+)/cards/:cardId(\\d+)', authenticateToken, controllerHandler(cardController.delete));
+
 router.get('/user/:userId(\\d+)/dashboard', authenticateToken, controllerHandler(cardController.getAllElement));
 
 // Refresh token
