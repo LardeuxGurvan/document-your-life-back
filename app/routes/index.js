@@ -20,7 +20,8 @@ router.patch('/user/:userId(\\d+)/profil', authenticateToken, controllerHandler(
 // Cards routes (auth)
 router.route('/user/:userId(\\d+)/cards/today')
     .put(
-        controllerHandler(upload.fields(fieldsArray)),
+        authenticateToken,
+        upload.fields(fieldsArray),
         controllerHandler(cardController.createOrUpdate),
     )
     .delete(authenticateToken, controllerHandler(cardController.deleteOneElement));

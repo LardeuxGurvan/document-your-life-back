@@ -67,16 +67,16 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsImVtYWlsI
 Content-Type: application/json
 
 {
-    "text": "carte oiarsentoarseitn 3"
+    "text": "carterefge oi3"
 }
 
 ### update card
-PATCH {{ endpoint }}/user/2/cards/today
+PUT {{ endpoint }}/user/2/cards/today
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ0b3RvQHRhdGYuY29tIiwiZmlyc3RfbmFtZSI6InRvdG8iLCJsYXN0X25hbWUiOiJ0YXRhIiwicGFzc3dvcmQiOiIkMmIkMTAkSEZzcDhjV3YuaUE0WGNzU1Nuc1loZXpQWTZmVGZsNU54QTl5VGVTZ1FpYUMweVRBbWUwZzYiLCJpbWFnZSI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMjItMDMtMDNUMTM6MDc6MDMuMTk3WiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY0NjM4ODU3MSwiZXhwIjoxNjQ2MzkwMzcxfQ.SgQ7rh3A3cYVA24nqH75x-FzNLtIa9Bjf0cpoy84Xbo
 Content-Type: application/json
 
 {
-    "text": "Bonjour aorseitnaroisten"
+    "text": "happy"
 }
 
 ### delete today card
