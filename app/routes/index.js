@@ -20,6 +20,7 @@ router.patch('/user/:userId(\\d+)/profil', authenticateToken, controllerHandler(
 // Cards routes (auth)
 router.route('/user/:userId(\\d+)/cards/today')
     .put(
+        authenticateToken,
         controllerHandler(upload.fields(fieldsArray)),
         controllerHandler(cardController.createOrUpdate),
     )
