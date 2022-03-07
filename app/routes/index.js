@@ -20,13 +20,12 @@ router.patch('/user/:userId(\\d+)/profil', authenticateToken, controllerHandler(
 // Cards routes (auth)
 router.route('/user/:userId(\\d+)/cards/today')
     .put(
-        authenticateToken,
         controllerHandler(upload.fields(fieldsArray)),
         controllerHandler(cardController.createOrUpdate),
     )
     .delete(authenticateToken, controllerHandler(cardController.deleteOneElement));
 
-router.get('/user/:userId(\\d+)/cards/:cardId(\\d+)', controllerHandler(cardController.getCard));
+router.get('/user/:userId(\\d+)/cards/:cardId(\\d+)', authenticateToken, controllerHandler(cardController.getCard));
 router.get('/user/:userId(\\d+)/dashboard', authenticateToken, controllerHandler(cardController.getAllElement));
 
 // Refresh token
