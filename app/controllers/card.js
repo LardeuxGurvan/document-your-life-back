@@ -195,10 +195,51 @@ module.exports = {
         // find the last created card by user
         const lastCard = await cardDataMapper.findLatestByUserPk(userId);
 
+        // Check if there is a file
+        if (req.files) {
+            if (req.files.image || req.files.video || req.files.audio) {
+                // add path to the body data
+                if (req.files.image) {
+                    req.body.image = `${process.cwd()}/${req.files.image[0].path}`;
+                    if (lastCard?.image) {
+                        // if medium, delete this medium
+                        fs.unlinkSync(lastCard.image);
+                    }
+                } else if (req.files.video) {
+                    req.body.video = `${process.cwd()}/${req.files.video[0].path}`;
+                    if (lastCard?.video) {
+                        // if medium, delete this medium
+                        fs.unlinkSync(lastCard.video);
+                    }
+                } else if (req.files.audio) {
+                    req.body.audio = `${process.cwd()}/${req.files.audio[0].path}`;
+                    if (lastCard?.audio) {
+                        // if medium, delete this medium
+                        fs.unlinkSync(lastCard.audio);
+                    }
+                } else {
+                    throw new ApiError(500, 'something went wrong');
+                }
+            }
+        }
+        // Case there is no card created before or last card's date is not matching
+        if (!lastCard) {
+            // create card
+            const result = await cardDataMapper.create(
+                text,
+                req.body.video,
+                req.body.audio,
+                req.body.image,
+                moodLabel,
+                Number(userId),
+            );
+            return res.json(result);
+        }
+
         const lastCardDate = lastCard.created_at.toISOString().split('T')[0];
         const currentDate = new Date().toISOString().split('T')[0];
 
-        if (!lastCard || lastCardDate !== currentDate) {
+        if (lastCardDate !== currentDate) {
             // create card
             const result = await cardDataMapper.create(
                 text,
@@ -209,46 +250,8 @@ module.exports = {
                 Number(userId),
             );
             return res.json(result);
-        }
-        // Check if there is a file
-        if (req.files.image || req.files.video || req.files.audio) {
-            // add path to the body data
-            if (req.files.image) {
-                req.body.image = `${process.cwd()}/${req.files.image[0].path}`;
-                if (lastCard?.image) {
-                    // if medium, delete this medium
-                    fs.unlinkSync(lastCard.image);
-                }
-            } else if (req.files.video) {
-                req.body.video = `${process.cwd()}/${req.files.video[0].path}`;
-                if (lastCard?.video) {
-                    // if medium, delete this medium
-                    fs.unlinkSync(lastCard.video);
-                }
-            } else if (req.files.audio) {
-                req.body.audio = `${process.cwd()}/${req.files.audio[0].path}`;
-                if (lastCard?.audio) {
-                    // if medium, delete this medium
-                    fs.unlinkSync(lastCard.audio);
-                }
-            } else {
-                throw new ApiError(500, 'something went wrong');
-            }
         }
 
-        // Case there is no card created before or last card's date is not matching
-        if (!lastCard || lastCardDate !== currentDate) {
-            // create card
-            const result = await cardDataMapper.create(
-                text,
-                req.body.video,
-                req.body.audio,
-                req.body.image,
-                moodLabel,
-                Number(userId),
-            );
-            return res.json(result);
-        }
         // update card
         const savedResult = await cardDataMapper.update(lastCard.id, req.body);
         return res.json(savedResult);
