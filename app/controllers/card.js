@@ -116,7 +116,7 @@ module.exports = {
             userId: user.id,
             userImage: user.image,
             lastCards,
-            mood: allCardMood,
+            calendarMoods: allCardMood,
         });
     },
 
