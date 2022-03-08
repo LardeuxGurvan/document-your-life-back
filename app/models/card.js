@@ -15,12 +15,27 @@ module.exports = {
 
     // Find the last inserted by user
     async findLatestByUserPk(userId) {
-        const result = await client.query('SELECT * FROM "card" WHERE "user_id" = $1 ORDER BY "created_at" DESC LIMIT 1', [userId]);
+        const result = await client.query('SELECT "card".*, "mood"."label" as moodLabel FROM "card" JOIN "mood" ON "card"."mood_id" = "mood"."id" WHERE "user_id" = $1 ORDER BY "created_at" DESC LIMIT 1', [userId]);
         if (result.rowCount === 0) {
             return null;
         }
 
         return result.rows[0];
+    },
+    async findCardsByUserPk(userId) {
+        const result = await client.query('SELECT "card".*, "mood"."label" as moodLabel FROM "card" JOIN "mood" ON "card"."mood_id" = "mood"."id" WHERE "user_id" = $1 ORDER BY "created_at" DESC LIMIT 2', [userId]);
+        if (result.rowCount === 0) {
+            return null;
+        }
+
+        return result.rows;
+    },
+    async selectAllCardsMood(userId) {
+        const result = await client.query('SELECT card.id, user_id, mood.label, card.created_at FROM "card" INNER JOIN "mood" ON card.mood_id = mood.id WHERE "user_id" = $1 ORDER BY "created_at"', [userId]);
+        if (result.rowCount === 0) {
+            return null;
+        }
+        return result.rows;
     },
     async findCardsByUserPk(userId) {
         const result = await client.query('SELECT * FROM "card" WHERE "user_id" = $1 ORDER BY "created_at" DESC LIMIT 2', [userId]);
