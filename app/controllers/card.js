@@ -1,9 +1,12 @@
-// const debug = require('debug')('app:cardController');
-const fs = require('fs');
+const debug = require('debug')('app:cardController');
 const { getStorage, ref, deleteObject } = require('firebase/storage');
+const firebase = require('firebase/app');
 const cardDataMapper = require('../models/card');
 const userDataMapper = require('../models/user');
 const { ApiError } = require('../helpers/errorHandler');
+
+// init firebase for delete
+firebase.initializeApp();
 
 module.exports = {
 
@@ -32,7 +35,7 @@ module.exports = {
                 userId: user.id,
                 userImage: user.image,
                 lastCards: lastCards[0],
-                mood: allCardMood,
+                calendarMoods: allCardMood,
             });
         }
         res.json({
@@ -64,35 +67,10 @@ module.exports = {
                 // add path to the body data
                 if (req.files.image) {
                     req.body.image = req.files.image[0].firebaseUrl;
-                    if (lastCard?.image) {
-                        const storage = getStorage();
-                        const fileRef = storage(lastCard.image);
-
-                        console.log(`File in database before delete exists : ${
-                            fileRef.exists()}`);
-                        // Delete the file using the delete() method
-                        deleteObject(fileRef).then(() => {
-                            // File deleted successfully
-                            console.log('File Deleted');
-                        }).catch((error) => {
-                            // Some Error occurred
-                            throw new ApiError((500, `Error on delete: ${error.message}`));
-                        });
-                        console.log(`File in database after delete exists : ${
-                            fileRef.exists()}`);
-                    }
                 } else if (req.files.video) {
                     req.body.video = req.files.video[0].firebaseUrl;
-                    if (lastCard?.video) {
-                        // if medium, delete this medium
-                        fs.unlinkSync(lastCard.video);
-                    }
                 } else if (req.files.audio) {
                     req.body.audio = req.files.audio[0].firebaseUrl;
-                    if (lastCard?.audio) {
-                        // if medium, delete this medium
-                        fs.unlinkSync(lastCard.audio);
-                    }
                 } else {
                     throw new ApiError(500, 'something went wrong');
                 }
@@ -126,6 +104,49 @@ module.exports = {
                 Number(userId),
             );
             return res.json(result);
+        }
+
+        // delete the last medium
+        // todo DRY, I can refactor this part
+        if (lastCard.image) {
+            const storage = getStorage();
+            // Create reference
+            const fileRef = ref(storage, lastCard.image);
+            // Delete the file using the delete() method
+            deleteObject(fileRef).then(() => {
+                // File deleted successfully
+                debug('File deleted successfully');
+            }).catch((error) => {
+                // Some Error occurred
+                throw new ApiError((500, `Error on delete: ${error.message}`));
+            });
+        }
+
+        if (lastCard.video) {
+            const storage = getStorage();
+            // Create reference
+            const fileRef = ref(storage, lastCard.video);
+            // Delete the file using the delete() method
+            deleteObject(fileRef).then(() => {
+                debug('File deleted successfully');
+            }).catch((error) => {
+                // Some Error occurred
+                throw new ApiError((500, `Error on delete: ${error.message}`));
+            });
+        }
+
+        if (lastCard.audio) {
+            const storage = getStorage();
+            // Create reference
+            const fileRef = ref(storage, lastCard.audio);
+            // Delete the file using the delete() method
+            deleteObject(fileRef).then(() => {
+                // File deleted successfully
+                debug('File deleted successfully');
+            }).catch((error) => {
+                // Some Error occurred
+                throw new ApiError((500, `Error on delete: ${error.message}`));
+            });
         }
 
         // update card
