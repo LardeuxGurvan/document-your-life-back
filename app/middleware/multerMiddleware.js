@@ -4,27 +4,11 @@ const ApiError = require('../errors/apiError');
 
 /**
  * Multer configuration file
- * fileStorage: configure where the uploaded file is stored and the name of the file
+ * fileStorage: configure where the uploaded file is stored temp
  * fileFilter: filter the file with ext name
  * upload: the multer middleware
  * fieldsArray: files formats
  */
-
-const fileStorage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        if (file.fieldname === 'image') {
-            cb(null, './user-storage/image/');
-        } else if (file.fieldname === 'video') {
-            cb(null, './user-storage/video/');
-        } else if (file.fieldname === 'audio') {
-            cb(null, './user-storage/audio/');
-        }
-    },
-    filename: (req, file, cb) => {
-        cb(null, `${file.fieldname}_${Date.now()
-        }${path.extname(file.originalname)}`);
-    },
-});
 
 const fileFilter = (req, file, cb) => {
     if (file.fieldname === 'image') {
@@ -49,7 +33,7 @@ const fileFilter = (req, file, cb) => {
 };
 
 const upload = multer({
-    storage: fileStorage,
+    storage: multer.memoryStorage(),
     limits: {
         fileSize: 5000000, // 5000000 Bytes = 5 MB
     },

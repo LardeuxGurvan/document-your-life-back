@@ -4,4 +4,4 @@ sqitch.conf
 package-lock.json
 user-storage/**
 .env
-./app/config/document**
+/app/config/document**
