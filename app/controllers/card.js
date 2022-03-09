@@ -48,7 +48,7 @@ module.exports = {
             res.json({
                 userId: user.id,
                 userImage: user.image,
-                dateSting0: lastCardDateString,
+                dateString0: lastCardDateString,
                 lastCard: lastCards[0],
                 calendarMoods: allCardMood,
             });
@@ -56,8 +56,8 @@ module.exports = {
         res.json({
             userId: user.id,
             userImage: user.image,
-            dateSting0: lastCardDateString,
-            dateSting1: lastCards[1].created_at.toLocaleString('fr-FR', {
+            dateString0: lastCardDateString,
+            dateString1: lastCards[1].created_at.toLocaleString('fr-FR', {
                 weekday: 'long',
                 day: 'numeric',
                 year: 'numeric',
