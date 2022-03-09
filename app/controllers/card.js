@@ -17,15 +17,15 @@ module.exports = {
         if (!card) {
             throw new ApiError(404, 'Card not found');
         }
+        card.dateString = card.created_at.toLocaleString('fr-FR', {
+            weekday: 'long',
+            day: 'numeric',
+            year: 'numeric',
+            month: 'long',
+        });
 
         return res.json({
             card,
-            cardDate: card.created_at.created_at.toLocaleString('fr-FR', {
-                weekday: 'long',
-                day: 'numeric',
-                year: 'numeric',
-                month: 'long',
-            }),
         });
     },
 
@@ -36,7 +36,7 @@ module.exports = {
         const allCardMood = await cardDataMapper.selectAllCardsMood(userId);
         // Compares current date with the created date of last card created
         const lastCardDate = lastCards[0].created_at.toISOString().split('T')[0];
-        const lastCardDateString = lastCards[0].created_at.toLocaleString('fr-FR', {
+        lastCards[0].dateString = lastCards[0].created_at.toLocaleString('fr-FR', {
             weekday: 'long',
             day: 'numeric',
             year: 'numeric',
@@ -48,21 +48,28 @@ module.exports = {
             res.json({
                 userId: user.id,
                 userImage: user.image,
-                dateString0: lastCardDateString,
+                // dateString0: lastCardDateString,
                 lastCard: lastCards[0],
                 calendarMoods: allCardMood,
             });
         }
+
+        lastCards[1].dateString = lastCards[1].created_at.toLocaleString('fr-FR', {
+            weekday: 'long',
+            day: 'numeric',
+            year: 'numeric',
+            month: 'long',
+        });
         res.json({
             userId: user.id,
             userImage: user.image,
-            dateString0: lastCardDateString,
-            dateString1: lastCards[1].created_at.toLocaleString('fr-FR', {
-                weekday: 'long',
-                day: 'numeric',
-                year: 'numeric',
-                month: 'long',
-            }),
+            // dateString0: lastCardDateString,
+            // dateString1: lastCards[1].created_at.toLocaleString('fr-FR', {
+            //     weekday: 'long',
+            //     day: 'numeric',
+            //     year: 'numeric',
+            //     month: 'long',
+            // }),
             lastCards,
             calendarMoods: allCardMood,
         });
@@ -181,15 +188,17 @@ module.exports = {
         console.log('card deleted');
         return res.status(204).json('Card deleted!');
     },
+
     async deleteOneElement(req, res) {
         const { userId } = req.params;
         const lastCard = await cardDataMapper.findLatestByUserPk(userId);
         const lastCardDate = lastCard.created_at.toISOString().split('T')[0];
         const currentDate = new Date().toISOString().split('T')[0];
-        if (lastCardDate === currentDate) {
-            const elementDeleted = await cardDataMapper.deleteOne(userId, req.body, currentDate);
-            return res.json(elementDeleted);
+        if (lastCardDate !== currentDate) {
+            return res.json('No daily card');
         }
+        const elementDeleted = await cardDataMapper.deleteOne(userId, req.body, currentDate);
+        return res.json(elementDeleted);
     },
 
 };
