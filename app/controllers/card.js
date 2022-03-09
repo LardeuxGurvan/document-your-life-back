@@ -18,7 +18,15 @@ module.exports = {
             throw new ApiError(404, 'Card not found');
         }
 
-        return res.json(card);
+        return res.json({
+            card,
+            cardDate: card.created_at.created_at.toLocaleString('fr-FR', {
+                weekday: 'long',
+                day: 'numeric',
+                year: 'numeric',
+                month: 'long',
+            }),
+        });
     },
 
     async getAllElement(req, res) {
@@ -28,19 +36,33 @@ module.exports = {
         const allCardMood = await cardDataMapper.selectAllCardsMood(userId);
         // Compares current date with the created date of last card created
         const lastCardDate = lastCards[0].created_at.toISOString().split('T')[0];
+        const lastCardDateString = lastCards[0].created_at.toLocaleString('fr-FR', {
+            weekday: 'long',
+            day: 'numeric',
+            year: 'numeric',
+            month: 'long',
+        });
         const currentDate = new Date().toISOString().split('T')[0];
 
         if (!lastCardDate === currentDate) {
             res.json({
                 userId: user.id,
                 userImage: user.image,
-                lastCards: lastCards[0],
+                dateSting0: lastCardDateString,
+                lastCard: lastCards[0],
                 calendarMoods: allCardMood,
             });
         }
         res.json({
             userId: user.id,
             userImage: user.image,
+            dateSting0: lastCardDateString,
+            dateSting1: lastCards[1].created_at.toLocaleString('fr-FR', {
+                weekday: 'long',
+                day: 'numeric',
+                year: 'numeric',
+                month: 'long',
+            }),
             lastCards,
             calendarMoods: allCardMood,
         });

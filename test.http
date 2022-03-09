@@ -15,6 +15,14 @@ Content-Type: application/json
     "password": "TotoTata!123",
     "passwordConfirm": "TotoTata!123"
 }
+### login 
+POST {{ endpoint }}/login
+Content-Type: application/json
+
+{
+    "email": "toto@tatds.com",
+    "password": "TotoTata!123"
+}
 
 
 ### profil
@@ -63,11 +71,11 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiO
 
 ### create card
 PUT {{ endpoint }}/user/11/cards/today
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsImVtYWlsIjoidG90b0B0YXRkcy5jb20iLCJmaXJzdF9uYW1lIjoidG90byIsImxhc3RfbmFtZSI6InRhdGEiLCJwYXNzd29yZCI6IiQyYiQxMCRHL0xvOEtNUjJQVDRucGhTdmU1UU8uTlEuV256Ti9oWE5VN2JjdFl4aDNkY29pZlAwalU4RyIsImltYWdlIjpudWxsLCJjcmVhdGVkX2F0IjoiMjAyMi0wMy0wN1QxMzoyMTowNC4wNDZaIiwidXBkYXRlZF9hdCI6bnVsbCwiaWF0IjoxNjQ2NjU5Mzc4LCJleHAiOjE2NDY2NjExNzh9.UI0jsRjHPLPNRH_ZtjKPG56B-ulhIpui85HkGQpkUQE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsImVtYWlsIjoidG90b0B0YXRkcy5jb20iLCJmaXJzdF9uYW1lIjoidG90byIsImxhc3RfbmFtZSI6InRhdGEiLCJwYXNzd29yZCI6IiQyYiQxMCRHL0xvOEtNUjJQVDRucGhTdmU1UU8uTlEuV256Ti9oWE5VN2JjdFl4aDNkY29pZlAwalU4RyIsImltYWdlIjpudWxsLCJjcmVhdGVkX2F0IjoiMjAyMi0wMy0wN1QxMzoyMTowNC4wNDZaIiwidXBkYXRlZF9hdCI6bnVsbCwiaWF0IjoxNjQ2NzU2MjExLCJleHAiOjE2NDY3NTgwMTF9.r69H_s_an60azKq3re-FEr8aSV4-RZTdL9iku59oXEo
 Content-Type: application/json
 
 {
-    "text": "carterefge oi3"
+    "text": "carte3"
 }
 
 ### update card
@@ -100,9 +108,8 @@ DELETE {{ endpoint }}/user/2/cards/5
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ0b3RvQHRhdGYuY29tIiwiZmlyc3RfbmFtZSI6InRvdG8iLCJsYXN0X25hbWUiOiJ0YXRhIiwicGFzc3dvcmQiOiIkMmIkMTAkSEZzcDhjV3YuaUE0WGNzU1Nuc1loZXpQWTZmVGZsNU54QTl5VGVTZ1FpYUMweVRBbWUwZzYiLCJpbWFnZSI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMjItMDMtMDNUMTM6MDc6MDMuMTk3WiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY0NjM4MzY4MywiZXhwIjoxNjQ2Mzg1NDgzfQ.yLo9bKQdGNWpG57Lph6gJ5p7hf0trrj3dCI-YwF7DGo
 
 ### dashboard
-GET {{ endpoint }}/user/2/dashboard
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ0b3RvQHRhdGYuY29tIiwiZmlyc3RfbmFtZSI6InRvdG8iLCJsYXN0X25hbWUiOiJ0YXRhIiwicGFzc3dvcmQiOiIkMmIkMTAkSEZzcDhjV3YuaUE0WGNzU1Nuc1loZXpQWTZmVGZsNU54QTl5VGVTZ1FpYUMweVRBbWUwZzYiLCJpbWFnZSI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMjItMDMtMDNUMTM6MDc6MDMuMTk3WiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY0NjM4ODU3MSwiZXhwIjoxNjQ2MzkwMzcxfQ.SgQ7rh3A3cYVA24nqH75x-FzNLtIa9Bjf0cpoy84Xbo
-
+GET {{ endpoint }}/user/11/dashboard
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsImVtYWlsIjoidG90b0B0YXRkcy5jb20iLCJmaXJzdF9uYW1lIjoidG90byIsImxhc3RfbmFtZSI6InRhdGEiLCJwYXNzd29yZCI6IiQyYiQxMCRHL0xvOEtNUjJQVDRucGhTdmU1UU8uTlEuV256Ti9oWE5VN2JjdFl4aDNkY29pZlAwalU4RyIsImltYWdlIjpudWxsLCJjcmVhdGVkX2F0IjoiMjAyMi0wMy0wN1QxMzoyMTowNC4wNDZaIiwidXBkYXRlZF9hdCI6bnVsbCwiaWF0IjoxNjQ2ODIwNjkyLCJleHAiOjE2NDY4MjI0OTJ9.YHG8agwXyUKXcGBOUQ_Z0hez4CGlztv26EshhcERjwI
 
 
 
