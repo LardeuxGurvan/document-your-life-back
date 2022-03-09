@@ -1,16 +1,14 @@
-# projet-11-document-your-life-back
+# Projet-11-document-your-life-back
+Illustrate your day with videos pictures and comments
 
-Illustrate your day with videos pictures and commentaries
+***Needs***
 
-**Besoins**
+Most people do not realize the importance of their daily life, that even a small task can have a big impact on their day.
 
-La plupart des gens ne prennent pas conscience de l’importance de leur quotidien, que même une tâche aussi petite soit elle peut avoir un impact important sur leur journée.    
+***Goals***
 
-**Objectifs** 
-
-- L’application à pour but de recentrer les gens sur l’importance du quotidien.
-- L’application permet à l’utilisateur d’illustrer le ressenti de son quotidien.
-
+The application aims to refocus people on the importance of everyday life.
+The application allows the user to illustrate the feeling of his daily life.
 
 **Setup database**
 
