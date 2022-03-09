@@ -2,7 +2,6 @@ const debug = require('debug')('app:firebase upload');
 const admin = require('firebase-admin');
 const { getStorage, ref, deleteObject } = require('firebase/storage');
 const path = require('path');
-const serviceAccount = require('../config/document-your-life-firebase-adminsdk-p8kck-ab5d2c58b7.json')
 
 const serviceAccount = require('../config/document-your-life-cloud-firebase-adminsdk-m0y0h-a95b323326.json');
 
