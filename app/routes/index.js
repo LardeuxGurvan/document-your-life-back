@@ -5,7 +5,7 @@ const { ApiError } = require('../helpers/errorHandler');
 const { errorHandler } = require('../helpers/errorHandler');
 const { authenticateToken, refreshAuthenticateToken } = require('../middleware/middlewareToken');
 const { upload, fieldsArray } = require('../middleware/multerMiddleware');
-const uploadFirebase = require('../services/firebase');
+const { uploadFirebase, uploadAvatar } = require('../services/firebase');
 
 const router = express.Router();
 
@@ -17,6 +17,13 @@ router.get('/logout', controllerHandler(userController.logout));
 // User routes (auth)
 router.get('/user/:userId(\\d+)/profil', authenticateToken, controllerHandler(userController.profil));
 router.patch('/user/:userId(\\d+)/profil', authenticateToken, controllerHandler(userController.updateProfil));
+router.patch(
+    '/user/:userId(\\d+)/avatar',
+    authenticateToken,
+    upload.single('avatar'),
+    uploadFirebase,
+    controllerHandler(userController.updateAvatar),
+);
 
 // Cards routes (auth)
 router.route('/user/:userId(\\d+)/cards/today')

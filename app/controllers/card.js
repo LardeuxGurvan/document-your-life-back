@@ -140,7 +140,7 @@ module.exports = {
                 debug('File deleted successfully');
             }).catch((error) => {
                 // Some Error occurred
-                throw new ApiError((500, `Error on delete: ${error.message}`));
+                debug((`Error on delete: ${error.message}`));
             });
         }
 
@@ -153,7 +153,7 @@ module.exports = {
                 debug('File deleted successfully');
             }).catch((error) => {
                 // Some Error occurred
-                throw new ApiError((500, `Error on delete: ${error.message}`));
+                debug((`Error on delete: ${error.message}`));
             });
         }
 
@@ -167,7 +167,7 @@ module.exports = {
                 debug('File deleted successfully');
             }).catch((error) => {
                 // Some Error occurred
-                throw new ApiError((500, `Error on delete: ${error.message}`));
+                debug((`Error on delete: ${error.message}`));
             });
         }
 

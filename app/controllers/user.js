@@ -1,3 +1,6 @@
+const debug = require('debug')('app:userController');
+const { getStorage, ref, deleteObject } = require('firebase/storage');
+// const firebase = require('firebase/app');
 const bcrypt = require('bcrypt');
 const userDataMapper = require('../models/user');
 const { ApiError } = require('../helpers/errorHandler');
@@ -17,6 +20,37 @@ const userController = {
 
         return res.json(user);
     },
+
+    async updateAvatar(req, res) {
+        const { userId } = req.params;
+        const user = await userDataMapper.findByPk(Number(userId));
+
+        // User does not exists
+        if (!user) {
+            throw new ApiError(404, 'User not found');
+        } else if (!req.file) {
+            res.json('Nothing changes');
+        } else if (user.image) {
+            const storage = getStorage();
+            // Create reference
+            const fileRef = ref(storage, user.image);
+            // Delete the file using the delete() method
+            deleteObject(fileRef).then(() => {
+                // File deleted successfully
+                debug('File deleted successfully');
+            }).catch((error) => {
+                // Some Error occurred
+                debug((`Error on delete: ${error.message}`));
+            });
+        }
+        console.log(req.file);
+
+        const imageUrl = req.file.firebaseUrl;
+        const newProfile = await userDataMapper.updateImage(userId, imageUrl);
+
+        return res.json(newProfile);
+    },
+
     async updateProfil(req, res) {
         // If Password change
         if (req.body.password) {
@@ -28,7 +62,6 @@ const userController = {
             // Hash with bcrypt
             const salt = await bcrypt.genSalt(10);
             const encryptedPassword = await bcrypt.hash(req.body.password, salt);
-            console.log('dans le cryptage du mp');
             const savedProfil = await userDataMapper.update(
                 req.params.userId,
                 req.body,
