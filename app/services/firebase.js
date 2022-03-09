@@ -1,31 +1,51 @@
-const debug = require('debug')('app:firebaseUpload');
+const debug = require('debug')('app:firebase upload');
 const admin = require('firebase-admin');
+const { getStorage, ref, deleteObject } = require('firebase/storage');
 const path = require('path');
+
+const serviceAccount = require('../config/document-your-life-cloud-firebase-adminsdk-m0y0h-a95b323326.json');
 
 const BUCKET = 'document-your-life-cloud.appspot.com';
 
-// Firebase init with credentials
 admin.initializeApp({
-    credential: admin.credential.cert({
-        type: process.env.TYPE,
-        project_id: process.env.PROJECTID,
-        private_key_id: process.env.PRIVATEKEYID,
-        private_key: process.env.PRIVATEKEY,
-        client_email: process.env.CLIENTEMAIL,
-        client_id: process.env.CLIENTID,
-        auth_uri: process.env.AUTHURI,
-        token_uri: process.env.TOKENURI,
-        auth_provider_x509_cert_url: process.env.AUTHPROVIDER,
-        client_x509_cert_url: process.env.CLIENTCERTURL,
-    }),
+    credential: admin.credential.cert(serviceAccount),
     storageBucket: BUCKET,
 });
 
 const bucket = admin.storage().bucket();
 
-// Upload middleware
+const uploadAvatar = (req, res, next) => {
+    if (!req.file) {
+        return next();
+    }
+};
+
 const uploadFirebase = (req, res, next) => {
-    if (req.files.image) {
+    if (req.file) {
+        console.log(req.file);
+        const avatar = req.file;
+        const name = `${avatar.fieldname}_${Date.now()}${path.extname(avatar.originalname)}`;
+
+        const file = bucket.file(name);
+
+        const stream = file.createWriteStream({
+            metadata: {
+                contentType: avatar.mimetype,
+            },
+        });
+
+        stream.on('error', (error) => new Error(error));
+
+        stream.on('finish', async () => {
+            console.log('ici');
+            await file.makePublic();
+
+            req.file.firebaseUrl = `https://storage.googleapis.com/${BUCKET}/${name}`;
+
+            next();
+        });
+        stream.end(avatar.buffer);
+    } else if (req.files.image) {
         const image = req.files.image[0];
         const name = `${image.fieldname}_${Date.now()}${path.extname(image.originalname)}`;
 
@@ -43,7 +63,7 @@ const uploadFirebase = (req, res, next) => {
             await file.makePublic();
 
             req.files.image[0].firebaseUrl = `https://storage.googleapis.com/${BUCKET}/${name}`;
-            debug('File uploaded successfully');
+
             next();
         });
 
@@ -66,7 +86,7 @@ const uploadFirebase = (req, res, next) => {
             await file.makePublic();
 
             req.files.video[0].firebaseUrl = `https://storage.googleapis.com/${BUCKET}/${name}`;
-            debug('File uploaded successfully');
+
             next();
         });
 
@@ -89,7 +109,7 @@ const uploadFirebase = (req, res, next) => {
             await file.makePublic();
 
             req.files.audio[0].firebaseUrl = `https://storage.googleapis.com/${BUCKET}/${name}`;
-            debug('File uploaded successfully');
+            debug('File added successfully');
             next();
         });
 
@@ -99,4 +119,4 @@ const uploadFirebase = (req, res, next) => {
     }
 };
 
-module.exports = uploadFirebase;
+module.exports = { uploadFirebase, uploadAvatar };

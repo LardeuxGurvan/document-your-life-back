@@ -36,7 +36,7 @@ module.exports = {
     },
 
     async findByPk(id) {
-        const result = await client.query('SELECT * FROM "user" WHERE id = $1', [id]);
+        const result = await client.query('SELECT "id", "email", "first_name", "last_name", "image" FROM "user" WHERE id = $1', [id]);
         if (result.rowCount === 0) {
             return null;
         }
@@ -56,16 +56,29 @@ module.exports = {
             password = newUser.password;
         }
         const updatedUser = await client.query(
-            'UPDATE "user" SET email = $1, first_name = $2, last_name = $3, password = $4 WHERE id = $5 RETURNING *',
+            'UPDATE "user" SET email = $1, first_name = $2, last_name = $3 WHERE id = $4 RETURNING id, email, first_name, last_name, image',
             [
                 newUser.email,
                 newUser.first_name,
                 newUser.last_name,
-                password,
                 id,
             ],
         );
-        console.log('dans le model : ', updatedUser.rows[0]);
+        return updatedUser.rows[0];
+    },
+
+    async updateImage(id, image) {
+        // const result = await client.query('SELECT * FROM "user" WHERE id = $1', [id]);
+        // if (result.rowCount === 0) {
+        //     throw new ApiError(400, 'This user does not exists');
+        // }
+        const newUser = await client.query(
+            'UPDATE "user" SET "image" = $1 WHERE id = $2 RETURNING id, email, first_name, last_name, image',
+            [
+                image,
+                id,
+            ],
+        );
         return newUser.rows[0];
     },
 

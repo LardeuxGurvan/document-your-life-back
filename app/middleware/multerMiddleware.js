@@ -11,10 +11,17 @@ const ApiError = require('../errors/apiError');
  */
 
 const fileFilter = (req, file, cb) => {
+    if (file.fieldname === 'avatar') {
+        if (!file.originalname.match(/\.(png|jpg)$/)) {
+            // upload only png and jpg format
+            return cb(new ApiError(403, 'Please upload an Image'));
+        }
+        cb(null, true);
+    }
     if (file.fieldname === 'image') {
         if (!file.originalname.match(/\.(png|jpg)$/)) {
             // upload only png and jpg format
-            return cb(new ApiError(403, 'Please upload a Image'));
+            return cb(new ApiError(403, 'Please upload an Image'));
         }
         cb(null, true);
     }
