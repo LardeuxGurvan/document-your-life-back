@@ -31,48 +31,132 @@ module.exports = {
 
     async getAllElement(req, res) {
         const { userId } = req.params;
+        const text = null;
+        const video = null;
+        const audio = null;
+        const image = null;
+        const moodLabel = null;
+        const dateStringFuction = (date) => date.toLocaleString('fr-FR', {
+            weekday: 'long',
+            day: 'numeric',
+            year: 'numeric',
+            month: 'long',
+        });
         const user = await userDataMapper.findByPk(Number(userId));
-        const lastCards = await cardDataMapper.findCardsByUserPk(userId);
-        const allCardMood = await cardDataMapper.selectAllCardsMood(userId);
-        // Compares current date with the created date of last card created
-        const lastCardDate = lastCards[0].created_at.toISOString().split('T')[0];
-        lastCards[0].dateString = lastCards[0].created_at.toLocaleString('fr-FR', {
-            weekday: 'long',
-            day: 'numeric',
-            year: 'numeric',
-            month: 'long',
-        });
-        const currentDate = new Date().toISOString().split('T')[0];
+        if (!user) {
+            throw new ApiError(404, 'User not found');
+        } else {
+            const lastCards = await cardDataMapper.findCardsByUserPk(userId);
 
-        if (!lastCardDate === currentDate) {
-            res.json({
-                userId: user.id,
-                userImage: user.image,
-                // dateString0: lastCardDateString,
-                lastCard: lastCards[0],
-                calendarMoods: allCardMood,
-            });
+            // User created card
+            if (lastCards) {
+                // Get all cards
+                const allCardMood = await cardDataMapper.selectAllCardsMood(userId);
+
+                // Compares current date with the created date of last card created
+                const lastCardDate = lastCards[0].created_at.toISOString().split('T')[0];
+                const currentDate = new Date().toISOString().split('T')[0];
+
+                // Give different date format
+                lastCards[0].dateString = dateStringFuction(lastCards[0].created_at);
+
+                // Case there is only one card
+                if (lastCards.length < 2) {
+                    // And this is the daily card
+                    if (lastCardDate === currentDate) {
+                        res.json({
+                            userId: user.id,
+                            userImage: user.image,
+                            lastCards,
+                            calendarMoods: allCardMood,
+                        });
+                    } else {
+                        const result = await cardDataMapper.create(
+                            text,
+                            video,
+                            audio,
+                            image,
+                            moodLabel,
+                            Number(userId),
+                        );
+                        result.moodLabel = 'neutral';
+                        result.dateString = dateStringFuction(result.created_at);
+                        const todayMood = {
+                            id: result.id,
+                            user_id: user.id,
+                            label: 'neutral',
+                            created_at: result.created_at,
+                        };
+                        res.json({
+                            userId: user.id,
+                            userImage: user.image,
+                            lastCards: [result, lastCards[0]],
+                            calendarMoods: [{ todayMood },
+                                allCardMood[0],
+                            ],
+                        });
+                    }
+                } else if (lastCardDate === currentDate) {
+                    lastCards[1].dateString = dateStringFuction(lastCards[0].created_at);
+                    res.json({
+                        userId: user.id,
+                        userImage: user.image,
+                        lastCard: lastCards,
+                        calendarMoods: allCardMood,
+                    });
+                } else {
+                    const result = await cardDataMapper.create(
+                        text,
+                        video,
+                        audio,
+                        image,
+                        moodLabel,
+                        Number(userId),
+                    );
+                    result.moodLabel = 'neutral';
+                    result.dateString = dateStringFuction(result.created_at);
+                    const todayMood = {
+                        id: result.id,
+                        user_id: user.id,
+                        label: 'neutral',
+                        created_at: result.created_at,
+                    };
+                    allCardMood.splice(0, 0, todayMood);
+                    allCardMood.join();
+                    res.json({
+                        userId: user.id,
+                        userImage: user.image,
+                        lastCards: [result, lastCards[0]],
+                        calendarMoods: allCardMood,
+                    });
+                }
+            } else {
+                // create card
+                const result = await cardDataMapper.create(
+                    text,
+                    video,
+                    audio,
+                    image,
+                    moodLabel,
+                    Number(userId),
+                );
+                result.moodLabel = 'neutral';
+                result.dateString = dateStringFuction(result.created_at);
+                return res.json({
+                    userId: user.id,
+                    userImage: user.image,
+                    lastCards: [result],
+                    calendarMoods: [
+                        {
+                            id: result.id,
+                            user_id: user.id,
+                            label: 'neutral',
+                            created_at: result.created_at,
+                        },
+                    ],
+                });
+            }
         }
-
-        lastCards[1].dateString = lastCards[1].created_at.toLocaleString('fr-FR', {
-            weekday: 'long',
-            day: 'numeric',
-            year: 'numeric',
-            month: 'long',
-        });
-        res.json({
-            userId: user.id,
-            userImage: user.image,
-            // dateString0: lastCardDateString,
-            // dateString1: lastCards[1].created_at.toLocaleString('fr-FR', {
-            //     weekday: 'long',
-            //     day: 'numeric',
-            //     year: 'numeric',
-            //     month: 'long',
-            // }),
-            lastCards,
-            calendarMoods: allCardMood,
-        });
     },
 
     async createOrUpdate(req, res) {
