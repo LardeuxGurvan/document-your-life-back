@@ -91,7 +91,7 @@ module.exports = {
                             userId: user.id,
                             userImage: user.image,
                             lastCards: [result, lastCards[0]],
-                            calendarMoods: [{ todayMood },
+                            calendarMoods: [todayMood,
                                 allCardMood[0],
                             ],
                         });
