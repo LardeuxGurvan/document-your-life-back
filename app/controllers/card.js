@@ -101,7 +101,7 @@ module.exports = {
                     res.json({
                         userId: user.id,
                         userImage: user.image,
-                        lastCard: lastCards,
+                        lastCards,
                         calendarMoods: allCardMood,
                     });
                 } else {
