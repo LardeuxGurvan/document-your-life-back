@@ -1,5 +1,5 @@
+/* eslint-disable consistent-return */
 const multer = require('multer');
-const path = require('path');
 const ApiError = require('../errors/apiError');
 
 /**
@@ -7,7 +7,6 @@ const ApiError = require('../errors/apiError');
  * fileStorage: configure where the uploaded file is stored temp
  * fileFilter: filter the file with ext name
  * upload: the multer middleware
- * fieldsArray: files formats
  */
 
 const fileFilter = (req, file, cb) => {
@@ -47,6 +46,4 @@ const upload = multer({
     fileFilter,
 });
 
-const fieldsArray = [{ name: 'image', maxCount: 1 }, { name: 'video', maxCount: 1 }, { name: 'audio', maxCount: 1 }];
-
-module.exports = { upload, fieldsArray };
+module.exports = upload;
