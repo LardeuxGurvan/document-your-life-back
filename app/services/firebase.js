@@ -3,9 +3,9 @@ const debug = require('debug')('app:firebase upload');
 const admin = require('firebase-admin');
 const path = require('path');
 
-const serviceAccount = require('../config/document-your-life-cloud-firebase-adminsdk-m0y0h-a95b323326.json');
+const serviceAccount = require('../config/document-your-life-backend-firebase-adminsdk-fv6tx-3f94fcce1d.json');
 
-const BUCKET = 'document-your-life-cloud.appspot.com';
+const BUCKET = 'document-your-life-backend.appspot.com';
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),

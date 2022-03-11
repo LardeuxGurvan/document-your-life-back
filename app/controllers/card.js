@@ -29,6 +29,7 @@ module.exports = {
         });
     },
 
+    // function to get dashboard elements
     async getAllElement(req, res) {
         const { userId } = req.params;
         const text = null;
@@ -36,7 +37,7 @@ module.exports = {
         const audio = null;
         const image = null;
         const moodLabel = null;
-        const dateStringFuction = (date) => date.toLocaleString('fr-FR', {
+        const dateStringFunction = (date) => date.toLocaleString('fr-FR', {
             weekday: 'long',
             day: 'numeric',
             year: 'numeric',
@@ -58,7 +59,7 @@ module.exports = {
                 const currentDate = new Date().toISOString().split('T')[0];
 
                 // Give different date format
-                lastCards[0].dateString = dateStringFuction(lastCards[0].created_at);
+                lastCards[0].dateString = dateStringFunction(lastCards[0].created_at);
 
                 // Case there is only one card
                 if (lastCards.length < 2) {
@@ -80,7 +81,7 @@ module.exports = {
                             Number(userId),
                         );
                         result.moodLabel = 'neutral';
-                        result.dateString = dateStringFuction(result.created_at);
+                        result.dateString = dateStringFunction(result.created_at);
                         const todayMood = {
                             id: result.id,
                             user_id: user.id,
@@ -97,7 +98,7 @@ module.exports = {
                         });
                     }
                 } else if (lastCardDate === currentDate) {
-                    lastCards[1].dateString = dateStringFuction(lastCards[0].created_at);
+                    lastCards[1].dateString = dateStringFunction(lastCards[1].created_at);
                     res.json({
                         userId: user.id,
                         userImage: user.image,
@@ -114,7 +115,7 @@ module.exports = {
                         Number(userId),
                     );
                     result.moodLabel = 'neutral';
-                    result.dateString = dateStringFuction(result.created_at);
+                    result.dateString = dateStringFunction(result.created_at);
                     const todayMood = {
                         id: result.id,
                         user_id: user.id,
@@ -141,7 +142,7 @@ module.exports = {
                     Number(userId),
                 );
                 result.moodLabel = 'neutral';
-                result.dateString = dateStringFuction(result.created_at);
+                result.dateString = dateStringFunction(result.created_at);
                 return res.json({
                     userId: user.id,
                     userImage: user.image,
@@ -159,6 +160,7 @@ module.exports = {
         }
     },
 
+    // Function to create or update card
     async createOrUpdate(req, res) {
         const { userId } = req.params;
         const {
@@ -267,6 +269,7 @@ module.exports = {
         return res.json(savedResult);
     },
 
+    // Function create Card
     async delete(req, res) {
         // check if card exists
         const card = await cardDataMapper.findByPk(Number(req.params.cardId));
