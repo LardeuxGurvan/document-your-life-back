@@ -1,12 +1,11 @@
+/* eslint-disable consistent-return */
 const debug = require('debug')('app:cardController');
 const { getStorage, ref, deleteObject } = require('firebase/storage');
-const firebase = require('firebase/app');
 const cardDataMapper = require('../models/card');
 const userDataMapper = require('../models/user');
 const { ApiError } = require('../helpers/errorHandler');
 
 // init firebase for delete
-firebase.initializeApp();
 
 module.exports = {
 
@@ -30,7 +29,7 @@ module.exports = {
     },
 
     // function to get dashboard elements
-    async getAllElement(req, res) {
+    async getAllElements(req, res) {
         const { userId } = req.params;
         const text = null;
         const video = null;
@@ -169,36 +168,21 @@ module.exports = {
         } = req.body;
 
         // At least one medium must be changed
-        if (!text && !req.files.image && !req.files.video && !req.files.audio && !moodLabel) {
+        if (!text && !moodLabel) {
             return res.json('Nothing changed');
         }
 
         // find the last created card by user
         const lastCard = await cardDataMapper.findLatestByUserPk(userId);
 
-        // Check if there is a file
-        if (req.files) {
-            if (req.files.image || req.files.video || req.files.audio) {
-                // add path to the body data
-                if (req.files.image) {
-                    req.body.image = req.files.image[0].firebaseUrl;
-                } else if (req.files.video) {
-                    req.body.video = req.files.video[0].firebaseUrl;
-                } else if (req.files.audio) {
-                    req.body.audio = req.files.audio[0].firebaseUrl;
-                } else {
-                    throw new ApiError(500, 'something went wrong');
-                }
-            }
-        }
         // Case there is no card created before or last card's date is not matching
         if (!lastCard) {
             // create card
             const result = await cardDataMapper.create(
                 text,
-                req.body.video,
-                req.body.audio,
-                req.body.image,
+                null,
+                null,
+                null,
                 moodLabel,
                 Number(userId),
             );
@@ -212,56 +196,13 @@ module.exports = {
             // create card
             const result = await cardDataMapper.create(
                 text,
-                req.body.video,
-                req.body.audio,
-                req.body.image,
+                null,
+                null,
+                null,
                 moodLabel,
                 Number(userId),
             );
             return res.json(result);
-        }
-
-        // delete the last medium
-        // todo DRY, I can refactor this part
-        if (lastCard.image) {
-            const storage = getStorage();
-            // Create reference
-            const fileRef = ref(storage, lastCard.image);
-            // Delete the file using the delete() method
-            deleteObject(fileRef).then(() => {
-                // File deleted successfully
-                debug('File deleted successfully');
-            }).catch((error) => {
-                // Some Error occurred
-                debug((`Error on delete: ${error.message}`));
-            });
-        }
-
-        if (lastCard.video) {
-            const storage = getStorage();
-            // Create reference
-            const fileRef = ref(storage, lastCard.video);
-            // Delete the file using the delete() method
-            deleteObject(fileRef).then(() => {
-                debug('File deleted successfully');
-            }).catch((error) => {
-                // Some Error occurred
-                debug((`Error on delete: ${error.message}`));
-            });
-        }
-
-        if (lastCard.audio) {
-            const storage = getStorage();
-            // Create reference
-            const fileRef = ref(storage, lastCard.audio);
-            // Delete the file using the delete() method
-            deleteObject(fileRef).then(() => {
-                // File deleted successfully
-                debug('File deleted successfully');
-            }).catch((error) => {
-                // Some Error occurred
-                debug((`Error on delete: ${error.message}`));
-            });
         }
 
         // update card
@@ -269,7 +210,7 @@ module.exports = {
         return res.json(savedResult);
     },
 
-    // Function create Card
+    // Function delete Card
     async delete(req, res) {
         // check if card exists
         const card = await cardDataMapper.findByPk(Number(req.params.cardId));
