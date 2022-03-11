@@ -44,7 +44,7 @@ module.exports = {
         return result.rows[0];
     },
 
-    async update(id, user, password) {
+    async update(id, user) {
         const result = await client.query('SELECT * FROM "user" WHERE id = $1', [id]);
         if (result.rowCount === 0) {
             throw new ApiError(400, 'This user does not exists');
@@ -52,9 +52,6 @@ module.exports = {
 
         const oldUser = result.rows[0];
         const newUser = { ...oldUser, ...user };
-        if (!password) {
-            password = newUser.password;
-        }
         const updatedUser = await client.query(
             'UPDATE "user" SET email = $1, first_name = $2, last_name = $3 WHERE id = $4 RETURNING id, email, first_name, last_name, image',
             [

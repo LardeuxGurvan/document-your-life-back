@@ -268,9 +268,60 @@ module.exports = {
     },
 
     async delete(req, res) {
-        await cardDataMapper.delete(req.params.userId, req.params.cardId);
-        console.log('card deleted');
-        return res.status(204).json('Card deleted!');
+        // check if card exists
+        const card = await cardDataMapper.findByPk(Number(req.params.cardId));
+        if (!card) {
+            throw new ApiError(404, 'Card not found');
+        }
+        const lastCardDate = card.created_at.toISOString().split('T')[0];
+        const currentDate = new Date().toISOString().split('T')[0];
+        if (lastCardDate === currentDate) {
+            throw new ApiError(405, 'Cannot delete the daily card');
+        } else {
+            if (card.image) {
+                const storage = getStorage();
+                // Create reference
+                const fileRef = ref(storage, card.image);
+                // Delete the file using the delete() method
+                deleteObject(fileRef).then(() => {
+                    // File deleted successfully
+                    debug('File deleted successfully');
+                }).catch((error) => {
+                    // Some Error occurred
+                    debug((`Error on delete: ${error.message}`));
+                });
+            }
+            if (card.video) {
+                const storage = getStorage();
+                // Create reference
+                const fileRef = ref(storage, card.video);
+                // Delete the file using the delete() method
+                deleteObject(fileRef).then(() => {
+                    // File deleted successfully
+                    debug('File deleted successfully');
+                }).catch((error) => {
+                    // Some Error occurred
+                    debug((`Error on delete: ${error.message}`));
+                });
+            }
+            if (card.audio) {
+                const storage = getStorage();
+                // Create reference
+                const fileRef = ref(storage, card.audio);
+                // Delete the file using the delete() method
+                deleteObject(fileRef).then(() => {
+                    // File deleted successfully
+                    debug('File deleted successfully');
+                }).catch((error) => {
+                    // Some Error occurred
+                    debug((`Error on delete: ${error.message}`));
+                });
+            }
+
+            await cardDataMapper.delete(req.params.userId, req.params.cardId);
+            debug('card deleted');
+            return res.status(204).json('Card deleted');
+        }
     },
 
     async deleteOneElement(req, res) {
