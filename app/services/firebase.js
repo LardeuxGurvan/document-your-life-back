@@ -1,6 +1,6 @@
+/* eslint-disable consistent-return */
 const debug = require('debug')('app:firebase upload');
 const admin = require('firebase-admin');
-const { getStorage, ref, deleteObject } = require('firebase/storage');
 const path = require('path');
 
 const serviceAccount = require('../config/document-your-life-cloud-firebase-adminsdk-m0y0h-a95b323326.json');
@@ -13,12 +13,6 @@ admin.initializeApp({
 });
 
 const bucket = admin.storage().bucket();
-
-const uploadAvatar = (req, res, next) => {
-    if (!req.file) {
-        return next();
-    }
-};
 
 const uploadFirebase = (req, res, next) => {
     if (req.file) {
@@ -119,4 +113,4 @@ const uploadFirebase = (req, res, next) => {
     }
 };
 
-module.exports = { uploadFirebase, uploadAvatar };
+module.exports = uploadFirebase;
