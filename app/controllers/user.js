@@ -20,6 +20,9 @@ const userController = {
 
     async updateProfil(req, res) {
         // If Password change
+        if (req.body.email) {
+            req.body.email = req.body.email.toLowerCase();
+        }
         if (req.body.password) {
             // Password confirm does not match
             if (req.body.password !== req.body.passwordConfirm) {
@@ -38,12 +41,12 @@ const userController = {
         }
 
         const savedProfil = await userDataMapper.update(req.params.userId, req.body);
-        console.log('pas dedans');
         return res.json(savedProfil);
     },
 
     async signupAction(req, res) {
         // User already exists
+        req.body.email = req.body.email.toLowerCase();
         const user = await userDataMapper.findByEmail(req.body.email);
         if (user) {
             throw new ApiError(400, 'User already exist');
@@ -69,6 +72,7 @@ const userController = {
     },
 
     async login(req, res) {
+        req.body.email = req.body.email.toLowerCase();
         const user = await userDataMapper.findByEmail(req.body.email);
 
         // Check user
