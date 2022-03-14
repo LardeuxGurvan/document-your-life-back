@@ -1,20 +1,24 @@
 const express = require('express');
 const controllerHandler = require('../helpers/apiControllerHandler');
-const { userController, cardController } = require('../controllers');
+const { userController, cardController, uploadController } = require('../controllers');
 const { ApiError } = require('../helpers/errorHandler');
 const { errorHandler } = require('../helpers/errorHandler');
 const { authenticateToken, refreshAuthenticateToken } = require('../middleware/middlewareToken');
-const { upload, fieldsArray } = require('../middleware/multerMiddleware');
-const { uploadFirebase, uploadAvatar } = require('../services/firebase');
+const upload = require('../middleware/multerMiddleware');
+const uploadFirebase = require('../services/firebase');
 
 const router = express.Router();
 
-// Log routes
+/** Log routes
+***********************************************************************
+*/
 router.post('/signup', controllerHandler(userController.signupAction));
 router.post('/login', controllerHandler(userController.login));
 router.get('/logout', controllerHandler(userController.logout));
 
-// User routes (auth)
+/** User routes (auth)
+***********************************************************************
+*/
 router.get('/user/:userId(\\d+)/profil', authenticateToken, controllerHandler(userController.profil));
 router.patch('/user/:userId(\\d+)/profil', authenticateToken, controllerHandler(userController.updateProfil));
 router.patch(
@@ -22,25 +26,57 @@ router.patch(
     authenticateToken,
     upload.single('avatar'),
     uploadFirebase,
-    controllerHandler(userController.updateAvatar),
+    controllerHandler(uploadController.avatarUpload),
 );
 
-// Cards routes (auth)
+/** Cards routes (auth)
+***********************************************************************
+*/
 router.route('/user/:userId(\\d+)/cards/today')
-    .put(
-        authenticateToken,
-        upload.fields(fieldsArray),
-        uploadFirebase,
-        controllerHandler(cardController.createOrUpdate),
-    )
+    .put(authenticateToken, controllerHandler(cardController.createOrUpdate))
     .delete(authenticateToken, controllerHandler(cardController.deleteOneElement));
 
-router.get('/user/:userId(\\d+)/cards/:cardId(\\d+)', authenticateToken, controllerHandler(cardController.getCard));
-router.get('/user/:userId(\\d+)/dashboard', authenticateToken, controllerHandler(cardController.getAllElement));
+router.patch(
+    '/user/:userId(\\d+)/cards/image',
+    authenticateToken,
+    upload.single('image'),
+    uploadFirebase,
+    controllerHandler(uploadController.imageUpload),
+);
 
-// Refresh token
+router.patch(
+    '/user/:userId(\\d+)/cards/video',
+    authenticateToken,
+    upload.single('video'),
+    uploadFirebase,
+    controllerHandler(uploadController.videoUpload),
+);
+
+router.patch(
+    '/user/:userId(\\d+)/cards/audio',
+    authenticateToken,
+    upload.single('audio'),
+    uploadFirebase,
+    controllerHandler(uploadController.audioUpload),
+);
+
+router.route('/user/:userId(\\d+)/cards/:cardId(\\d+)')
+    .get(authenticateToken, controllerHandler(cardController.getCard))
+    .delete(authenticateToken, controllerHandler(cardController.delete));
+
+/** Dashboard route (auth)
+***********************************************************************
+*/
+router.get('/user/:userId(\\d+)/dashboard', authenticateToken, controllerHandler(cardController.getAllElements));
+
+/** refresh token
+***********************************************************************
+*/
 router.post('/api/refreshToken', refreshAuthenticateToken);
 
+/** Error catcher
+***********************************************************************
+*/
 router.use(() => {
     throw new ApiError(404, 'API Route not found');
 });

@@ -17,8 +17,15 @@ The application allows the user to illustrate the feeling of his daily life.
 - Create sqitch.conf
 - sqitch deploy
 
+
+**firebase**
+
+- Create free account on firebase
+- Add storage
+- Get the credentials json then put it in the config folder
+
 **run server**
 
 - npm i
 - create and fill .env
-- npm run dev
+- npm run dev / start

@@ -31,7 +31,7 @@ module.exports = {
         return result.rows;
     },
     async selectAllCardsMood(userId) {
-        const result = await client.query('SELECT card.id, user_id, mood.label, card.created_at FROM "card" INNER JOIN "mood" ON card.mood_id = mood.id WHERE "user_id" = $1 ORDER BY "created_at"', [userId]);
+        const result = await client.query('SELECT card.id, user_id, mood.label, card.created_at FROM "card" INNER JOIN "mood" ON card.mood_id = mood.id WHERE "user_id" = $1 ORDER BY "created_at" DESC', [userId]);
         if (result.rowCount === 0) {
             return null;
         }
