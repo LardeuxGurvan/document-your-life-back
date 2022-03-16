@@ -11,27 +11,27 @@ const ApiError = require('../errors/apiError');
 
 const fileFilter = (req, file, cb) => {
     if (file.fieldname === 'avatar') {
-        if (!file.originalname.match(/\.(png|jpg)$/)) {
+        if (!file.originalname.match(/\.(jpeg|jfif|pjpeg|pjp|png|jpg|webp|svg|gif)$/)) {
             // upload only png and jpg format
             return cb(new ApiError(403, 'Please upload an Image'));
         }
         cb(null, true);
     }
     if (file.fieldname === 'image') {
-        if (!file.originalname.match(/\.(png|jpg)$/)) {
+        if (!file.originalname.match(/\.(jpeg|jfif|pjpeg|pjp|png|jpg|webp|svg|gif)$/)) {
             // upload only png and jpg format
             return cb(new ApiError(403, 'Please upload an Image'));
         }
         cb(null, true);
     }
     if (file.fieldname === 'video') {
-        if (!file.originalname.match(/\.(mp4|MPEG-4|mkv)$/)) {
+        if (!file.originalname.match(/\.(mp4|m4v|avi|MPEG-4|mpeg|mpg|vob|mkv|webm|wmv|qt|mov|avi|flv|asf)$/)) {
             return cb(new ApiError(403, 'Please upload a video'));
         }
         cb(null, true);
     }
     if (file.fieldname === 'audio') {
-        if (!file.originalname.match(/\.(mp3)$/)) {
+        if (!file.originalname.match(/\.(mp3|wav|flac|FLAC|FLA|ogg|wma|aiff)$/)) {
             return cb(new ApiError(403, 'Please upload an audio'));
         }
         cb(null, true);
