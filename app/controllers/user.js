@@ -86,13 +86,13 @@ const userController = {
             throw new ApiError(400, 'Connection information is invalid');
         }
 
-        const userKey = {
-            userKey: user.id,
-            userEmail: user.email,
+        const userKeys = {
+            id: user.id,
+            email: user.email,
         };
         // Generate unique token
-        const tokenGenerated = generateAccessToken(userKey);
-        const refreshTokenGenerated = refreshAccessToken(userKey);
+        const tokenGenerated = generateAccessToken(userKeys);
+        const refreshTokenGenerated = refreshAccessToken(userKeys);
         return res
             .json({
                 userId: user.id,
