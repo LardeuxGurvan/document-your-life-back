@@ -68,7 +68,12 @@ const userController = {
             req.body.last_name,
             encryptedPassword,
         );
-        return res.json(newUser);
+        return res.json({
+            id: newUser.id,
+            email: newUser.email,
+            first_name: newUser.first_name,
+            last_name: newUser.last_name,
+        });
     },
 
     async login(req, res) {
